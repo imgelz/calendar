@@ -163,7 +163,12 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         //Package Kalender
-        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        MaddHatter\LaravelFullcalendar\ServiceProvider::class, \
+        //DataTable
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        //Laratrust
+        Laratrust\LaratrustServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -202,12 +207,14 @@ return [
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'DB' => Illuminate\Support\Facades\DB::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
+        'Laratrust'   => Laratrust\LaratrustFacade::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Event;
 use Session;
 use Illuminate\Http\Request;
+use DataTables;
+use Yajra\DataTables\Contracts\DataTable;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 
@@ -21,10 +23,9 @@ class EventController extends Controller
         $event = [];
 
         foreach ($events as $row) {
-            $enddate = $row->end_date . "24:00:00";
             $event[] = \Calendar::event(
                 $row->title,
-                true,
+                false,
                 new \DateTime($row->start_date),
                 new \DateTime($row->end_date),
                 $row->id,
@@ -35,6 +36,7 @@ class EventController extends Controller
         }
 
         $calendar = \Calendar::addEvents($event);
+
         return view('calendar.index', compact('events', 'calendar'));
     }
 
@@ -57,9 +59,17 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'color' => 'required',
+            'description' => 'required|max:30',
+            'start_date' => 'required',
+            'end_date' => 'required'
+        ]);
         $events = new Event;
         $events->title = $request->title;
         $events->color = $request->color;
+        $events->description = $request->description;
         $events->start_date = $request->start_date;
         $events->end_date = $request->end_date;
         $events->save();
@@ -77,10 +87,24 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
-        $events = Event::all();
-        return View('calendar.display')->with('events', $events);
+        // $events = Event::all();
+        // return View('calendar.display')->with('events', $events);
+
+        if ($request->ajax()) {
+            $events = Event::latest()->get();
+            return Datatables::of($events)
+                ->addIndexColumn()
+                ->addColumn('aksi', function ($row) {
+                    $btn = '<button type="submit" class="edit-jadwal btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit" data-id="' . $row->id . '" data-title="' . $row->title . '" data-color="' . $row->color . '" data-description="' . $row->description . '" data-start_date="' . $row->start_date . '" data-end_date="' . $row->end_date . '"> <i class="fa fa-edit"></i></button>';
+                    $btn = $btn . ' <button type="submit" class="hapus-jadwal btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-hapus" data-id="' . $row->id . '" data-title="' . $row->title . '" data-color="' . $row->color . '" data-description="' . $row->description . '" data-start_date="' . $row->start_date . '" data-end_date="' . $row->end_date . '"><i class="fa fa-trash-o"></i></button>';
+                    return $btn;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+        }
+        return view('calendar.display');
     }
 
     /**
@@ -92,7 +116,7 @@ class EventController extends Controller
     public function edit($id)
     {
         $events = Event::findOrFail($id);
-        return view('calendar.update', compact('events'));
+        return view('calendar.edit', compact('events'));
     }
 
     /**
@@ -104,9 +128,17 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $events = Event::findOrFail($id);
+        $request->validate([
+            'title' => 'required',
+            'color' => 'required',
+            'description' => 'required|max:30',
+            'start_date' => 'required',
+            'end_date' => 'required'
+        ]);
+        $events = Event::findOrFail($request->id);
         $events->title = $request->title;
         $events->color = $request->color;
+        $events->description = $request->description;
         $events->start_date = $request->start_date;
         $events->end_date = $request->end_date;;
         $events->save();
@@ -124,16 +156,18 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $events = Event::findOrFail($id);
-        if (!Event::destroy($id)) {
+        $events = Event::findOrFail($request->id);
+        if (!Event::destroy($request->id)) {
             return redirect()->back();
+        } else {
+            $events->delete();
+            Session::flash("flash_notification", [
+                "level" => "danger",
+                "message" => "Berhasil menghapus jadwal kegiatan <b>" . $events->title . "</b>"
+            ]);
+            return redirect()->route('event.index');
         }
-        Session::flash("flash_notification", [
-            "level" => "danger",
-            "message" => "Berhasil menghapus jadwal kegiatan <b>" . $events->title . "</b>"
-        ]);
-        return redirect()->route('event.index');
     }
 }
