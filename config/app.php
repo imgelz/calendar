@@ -216,6 +216,7 @@ return [
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Laratrust'   => Laratrust\LaratrustFacade::class,
         'Log' => Illuminate\Support\Facades\Log::class,
+        'LogActivity' => App\Helpers\LogActivity::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password' => Illuminate\Support\Facades\Password::class,

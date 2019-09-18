@@ -1,4 +1,4 @@
-@extends('layouts.datatable')
+@extends('layouts.Halaman.datatable')
 @section('content')
     @include('calendar.edit')
     @include('calendar.delete')
@@ -36,6 +36,7 @@
 @section('js')
     <script src="/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
         $(function () {
             $.ajaxSetup({
@@ -43,6 +44,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 }
             });
+            //Data di Tabel
             var table = $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -58,6 +60,7 @@
                 ]
             });
 
+            //Edit
             $('.data-jadwal').on('click', '.edit-jadwal',function (){
                 $('#modal-edit').on('show.bs.modal', function (event) {
                     var button = $(event.relatedTarget)
@@ -70,37 +73,84 @@
 
                     var modal = $(this)
                     modal.find('#data-id').val(id)
-                    modal.find('#data-title').val(title)
-                    modal.find('#data-color').val(color)
-                    modal.find('#data-description').val(description)
-                    modal.find('#data-start_date').val(start_date)
-                    modal.find('#data-end_date').val(end_date)
+                    modal.find('#title').val(title)
+                    modal.find('#color').val(color)
+                    modal.find('#description').val(description)
+                    modal.find('#start_date').val(start_date)
+                    modal.find('#end_date').val(end_date)
 
                     console.log(id);
 
                 })
             })
-
+                //Hapus
                 $('.data-jadwal').on('click', '.hapus-jadwal',function (){
                     $('#modal-hapus').on('show.bs.modal', function (event) {
                     var button = $(event.relatedTarget)
                     var id = button.data('id')
-                    // var title = button.data('title')
-                    // var color = button.data('color')
-                    // var start_date = button.data('start_date')
-                    // var end_date = button.data('end_date')
 
                     var modal = $(this)
                     modal.find('#data-id-hapus').val(id)
-                    // modal.find('#data-title').val(title)
-                    // modal.find('#data-color').val(color)
-                    // modal.find('#data-start_date').val(start_date)
-                    // modal.find('#data-end_date').val(end_date)
-
                     console.log(id);
 
                     })
                 })
+
+                //SweetAlert Edit
+                $('#form-edit').on('submit', function (e) {
+                e.preventDefault();
+                    $.ajax({
+                        url: '/display/'+ $('#data-id').val(),
+                        method: 'PUT',
+                        data: $('#form-edit').serialize(),
+                        success: function (res) {
+                            swal({
+                                title: "Berhasil Mengubah",
+                                icon: "success",
+                            });
+
+                            location.reload();
+                        },
+                        error: function (err) {
+                            console.log(err);
+
+                            if (err.status == 422) {
+                                console.log(err.responseJSON);
+                                $('#success_message').fadeIn().html(err.responseJSON.message);
+                                console.warn(err.responseJSON.errors);
+
+                                $.each(err.responseJSON.errors, function (i, error) {
+                                    var el = $(document).find('[id="'+i+'"]');
+                                    el.after($('<span style="color: red;">'+error[0]+'</span>'));
+                                });
+                            }
+                        }
+                    })
+                })
+
+                //SweetAlert Hapus
+                $('#form-hapus').on('submit', function (e) {
+                e.preventDefault();
+                    $.ajax({
+                        url: '/display/'+ $('#data-id-hapus').val(),
+                        method: 'DELETE',
+                        data: $('#form-hapus').serialize(),
+                        success: function (res) {
+                            swal({
+                                title: "Berhasil Menghapus",
+                                icon: "success",
+                            });
+
+                            location.reload();
+                        },
+                        error: function (err) {
+                            console.log(err)
+                        }
+                    })
+                })
+
+            // $('#data-start_date').datetimepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'DD/MM/YYYY hh:mm A' }})
+            // $('#data-end_date').datetimepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'DD/MM/YYYY hh:mm A' }})
         });
     </script>
 @endsection

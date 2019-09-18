@@ -21,3 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/event', 'EventController');
 Route::get('/display', 'EventController@show');
+Route::put('/display/{id}', 'EventController@update');
+Route::delete('/display/{id}', 'EventController@destroy');
+
+Route::resource('/logActivity', 'LogActivityController');
+Route::delete('/logActivity/{id}', 'LogActivityController@destroy');

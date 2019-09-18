@@ -59,9 +59,11 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        \LogActivity::addToLog('Menambah Jadwal Kegiatan');
+
         $request->validate([
-            'title' => 'required',
-            'color' => 'required',
+            'title' => 'required|unique:events',
+            'color' => 'required|unique:events',
             'description' => 'required|max:30',
             'start_date' => 'required',
             'end_date' => 'required'
@@ -74,11 +76,12 @@ class EventController extends Controller
         $events->end_date = $request->end_date;
         $events->save();
 
-        Session::flash("flash_notification", [
-            "level" => "success",
-            "message" => "Berhasil menyimpan jadwal kegiatan <b>" . $events->title . "</b>"
-        ]);
-        return redirect()->route('event.index');
+        $response = [
+            'success' => true,
+            'data'  => $events,
+            'message' => 'Berhasil Menambah!'
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -89,16 +92,13 @@ class EventController extends Controller
      */
     public function show(Request $request)
     {
-        // $events = Event::all();
-        // return View('calendar.display')->with('events', $events);
-
         if ($request->ajax()) {
             $events = Event::latest()->get();
             return Datatables::of($events)
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($row) {
-                    $btn = '<button type="submit" class="edit-jadwal btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit" data-id="' . $row->id . '" data-title="' . $row->title . '" data-color="' . $row->color . '" data-description="' . $row->description . '" data-start_date="' . $row->start_date . '" data-end_date="' . $row->end_date . '"> <i class="fa fa-edit"></i></button>';
-                    $btn = $btn . ' <button type="submit" class="hapus-jadwal btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-hapus" data-id="' . $row->id . '" data-title="' . $row->title . '" data-color="' . $row->color . '" data-description="' . $row->description . '" data-start_date="' . $row->start_date . '" data-end_date="' . $row->end_date . '"><i class="fa fa-trash-o"></i></button>';
+                    $btn = '<button type="submit" title="Edit" class="edit-jadwal btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit" data-id="' . $row->id . '" data-title="' . $row->title . '" data-color="' . $row->color . '" data-description="' . $row->description . '" data-start_date="' . $row->start_date . '" data-end_date="' . $row->end_date . '"> <i class="fa fa-edit"></i></button>';
+                    $btn = $btn . ' <button type="submit" title="Hapus" class="hapus-jadwal btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-hapus" data-id="' . $row->id . '" data-title="' . $row->title . '" data-color="' . $row->color . '" data-description="' . $row->description . '" data-start_date="' . $row->start_date . '" data-end_date="' . $row->end_date . '"><i class="fa fa-trash-o"></i></button>';
                     return $btn;
                 })
                 ->rawColumns(['aksi'])
@@ -128,7 +128,10 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        \LogActivity::addToLog('Mengubah Jadwal Kegiatan');
+
+
+        $this->validate($request, [
             'title' => 'required',
             'color' => 'required',
             'description' => 'required|max:30',
@@ -140,14 +143,15 @@ class EventController extends Controller
         $events->color = $request->color;
         $events->description = $request->description;
         $events->start_date = $request->start_date;
-        $events->end_date = $request->end_date;;
+        $events->end_date = $request->end_date;
         $events->save();
 
-        Session::flash("flash_notification", [
-            "level" => "warning",
-            "message" => "Berhasil mengubah jadwal kegiatan <b>" . $events->title . "</b>"
-        ]);
-        return redirect()->route('event.index');
+        $response = [
+            'success' => true,
+            'data'  => $events,
+            'message' => 'Berhasil diubah!'
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -158,16 +162,20 @@ class EventController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+        \LogActivity::addToLog('Menghapus Jadwal Kegiatan');
+
         $events = Event::findOrFail($request->id);
         if (!Event::destroy($request->id)) {
             return redirect()->back();
         } else {
             $events->delete();
-            Session::flash("flash_notification", [
-                "level" => "danger",
-                "message" => "Berhasil menghapus jadwal kegiatan <b>" . $events->title . "</b>"
-            ]);
-            return redirect()->route('event.index');
+
+            $response = [
+                'success' => true,
+                'data'  => $events,
+                'message' => 'Berhasil dihapus!'
+            ];
+            return response()->json($response, 200);
         }
     }
 }

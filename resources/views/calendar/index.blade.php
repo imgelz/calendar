@@ -1,36 +1,6 @@
 @extends('layouts.app')
 
-@section('css')
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
-
-    {{-- <link rel="stylesheet" href="/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.css">
-    <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.print.min.css">
-    <link rel="stylesheet" href="/adminlte/dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="/adminlte/dist/css/skins/_all-skins.min.css"> --}}
-@endsection
-
-@section('js')
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
-
-    {{-- <script src="/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
-    <script src="/adminlte/bower_components/fastclick/lib/fastclick.js"></script>
-    <script src="/adminlte/dist/js/adminlte.min.js"></script>
-    <script src="/adminlte/dist/js/demo.js"></script>
-    <script src="/adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
-    <script src="/adminlte/bower_components/moment/moment.js"></script>
-    <script src="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js"></script> --}}
-@endsection
-
-
 @section('content')
-    @include('layouts.flash')
     @include('calendar.create')
 
     <!-- Button trigger modal -->
@@ -55,3 +25,58 @@
             </div>
     </section>
 @endsection
+
+@section('css')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+@endsection
+
+@section('js')
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                }
+            });
+
+            var tambah = $('#form-tambah');
+            tambah.on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/event',
+                    method: 'POST',
+                    data: tambah.serialize(),
+                    success: function (res) {
+                        swal({
+                            title: "Berhasil Menambah",
+                            icon: "success",
+                        });
+
+                        location.reload();
+                    },
+                    error: function (err) {
+                        console.log(err)
+
+                        if (err.status == 422) {
+                                console.log(err.responseJSON);
+                                $('#success_message').fadeIn().html(err.responseJSON.message);
+                                console.warn(err.responseJSON.errors);
+
+                                $.each(err.responseJSON.errors, function (i, error) {
+                                    var el = $(document).find('[id="'+i+'"]');
+                                    el.after($('<span style="color: red;">'+error[0]+'</span>'));
+                                });
+                            }
+                    }
+                })
+            })
+
+        });
+    </script>
+@endsection
+
