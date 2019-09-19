@@ -4,10 +4,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="/adminlte/dist/img/avatar5.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{ Auth::user()->name }}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -23,6 +23,9 @@
       </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
+
+        @guest
+        @else
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         {{-- <li class="treeview">
@@ -105,37 +108,24 @@
             <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
           </ul>
         </li> --}}
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Tables</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('/logActivity')}}"><i class="fa fa-circle-o"></i> Log Activity tables</a></li>
-            <li><a href="{{ url('/display')}}"><i class="fa fa-circle-o"></i> Data tables</a></li>
-          </ul>
-        </li>
         <li class="active">
           <a href="{{route('event.index')}}">
             <i class="fa fa-calendar"></i> <span>Calendar</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
           </a>
         </li>
-        {{-- <li>
-          <a href="mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Mailbox</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
-            </span>
+        <li>
+          <a href="{{url('/display')}}">
+            <i class="fa fa-table"></i> <span>Data Tables</span>
           </a>
-        </li> --}}
+        </li>
+
+            @role('admin')
+        <li>
+          <a href="{{url('admin/logActivity')}}">
+            <i class="fa fa-server"></i> <span>Log Activity</span>
+          </a>
+        </li>
+        @endrole
         {{-- <li class="treeview">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Examples</span>
@@ -194,6 +184,7 @@
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> --}}
       </ul>
+        @endguest
     </section>
     <!-- /.sidebar -->
   </aside>

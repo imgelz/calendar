@@ -86,7 +86,7 @@
                 $('#form-hapus-log').on('submit', function (e) {
                 e.preventDefault();
                     $.ajax({
-                        url: '/logActivity/'+ $('#data-id-hapus').val(),
+                        url: '/admin/logActivity/'+ $('#data-id-hapus').val(),
                         method: 'DELETE',
                         data: $('#form-hapus-log').serialize(),
                         success: function (res) {

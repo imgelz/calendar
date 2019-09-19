@@ -4,9 +4,13 @@
     @include('calendar.create')
 
     <!-- Button trigger modal -->
-    <center>
-        <button type="button" class="btn btn-primary btn-lg fa fa-plus-square" data-toggle="modal" data-target="#create"> Create</button>
 
+    <center>
+        @if(Auth::check())
+        <button type="button" class="btn btn-primary btn-lg fa fa-plus-square" data-toggle="modal" data-target="#create"> Create</button>
+        @else
+        <a href="/login" class="btn btn-primary btn-lg fa fa-plus-square">Create</a>
+        @endif
     </center>
         <br>
 
@@ -15,7 +19,7 @@
             <div class="row">
                 <div class="col-md-12 col-md-offset-1">
                     <div class="panel panel-default">
-                        <center><div class="panel-heading" style="background:darkblue; color:aqua"> Calendar Meeting</div></center>
+                        <center><div class="panel-heading" style="background:darkblue; color:aqua"><h3>Calendar</h3></div></center>
                         <div id="calendar" class="panel-body" style="background:darkseagreen">
                             {!! $calendar->calendar() !!}
                             {!! $calendar->script() !!}

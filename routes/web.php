@@ -19,10 +19,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//AdminRoute
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/', function () {
+        return view('admin.index');
+    });
+    Route::resource('/logActivity', 'LogActivityController');
+    Route::delete('/logActivity/{id}', 'LogActivityController@destroy');
+});
+
 Route::resource('/event', 'EventController');
 Route::get('/display', 'EventController@show');
 Route::put('/display/{id}', 'EventController@update');
 Route::delete('/display/{id}', 'EventController@destroy');
-
-Route::resource('/logActivity', 'LogActivityController');
-Route::delete('/logActivity/{id}', 'LogActivityController@destroy');
