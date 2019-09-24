@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Kategori;
 use Session;
 use Illuminate\Http\Request;
 use DataTables;
@@ -47,8 +48,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        $events = Event::all();
-        return View('calendar.create', compact('events'));
+        // $events = Event::all();
+        // return View('calendar.create', compact('events'));
     }
 
     /**
@@ -59,12 +60,13 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        \LogActivity::addToLog('Menambah Jadwal Kegiatan');
+        \LogActivity::addToLog("Menambah Jadwal Kegiatan");
 
         $request->validate([
             'title' => 'required|unique:events',
             'color' => 'required|unique:events',
             'description' => 'required|max:30',
+            'id_kategori' => 'required',
             'start_date' => 'required',
             'end_date' => 'required'
         ]);
@@ -72,6 +74,7 @@ class EventController extends Controller
         $events->title = $request->title;
         $events->color = $request->color;
         $events->description = $request->description;
+        $events->id_kategori = $request->id_kategori;
         $events->start_date = $request->start_date;
         $events->end_date = $request->end_date;
         $events->save();
@@ -93,12 +96,12 @@ class EventController extends Controller
     public function show(Request $request)
     {
         if ($request->ajax()) {
-            $events = Event::latest()->get();
+            $events = Event::with('kategori')->latest()->get();
             return Datatables::of($events)
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($row) {
-                    $btn = '<button type="submit" title="Edit" class="edit-jadwal btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit" data-id="' . $row->id . '" data-title="' . $row->title . '" data-color="' . $row->color . '" data-description="' . $row->description . '" data-start_date="' . $row->start_date . '" data-end_date="' . $row->end_date . '"> <i class="fa fa-edit"></i></button>';
-                    $btn = $btn . ' <button type="submit" title="Hapus" class="hapus-jadwal btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-hapus" data-id="' . $row->id . '" data-title="' . $row->title . '" data-color="' . $row->color . '" data-description="' . $row->description . '" data-start_date="' . $row->start_date . '" data-end_date="' . $row->end_date . '"><i class="fa fa-trash-o"></i></button>';
+                    $btn = '<button type="submit" title="Edit" class="edit-jadwal btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit" data-id="' . $row->id . '" data-title="' . $row->title . '" data-color="' . $row->color . '" data-description="' . $row->description . '" data-id_kategori="' . $row->id_kategori . '" data-start_date="' . $row->start_date . '" data-end_date="' . $row->end_date . '"> <i class="fa fa-edit"></i></button>';
+                    $btn = $btn . ' <button type="submit" title="Hapus" class="hapus-jadwal btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-hapus" data-id="' . $row->id . '" data-title="' . $row->title . '" data-color="' . $row->color . '" data-description="' . $row->description . '" data-id_kategori="' . $row->id_kategori . '" data-start_date="' . $row->start_date . '" data-end_date="' . $row->end_date . '"><i class="fa fa-trash-o"></i></button>';
                     return $btn;
                 })
                 ->rawColumns(['aksi'])
@@ -115,8 +118,8 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        $events = Event::findOrFail($id);
-        return view('calendar.edit', compact('events'));
+        // $events = Event::findOrFail($id);
+        // return view('calendar.edit', compact('events'));
     }
 
     /**
@@ -128,20 +131,21 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        \LogActivity::addToLog('Mengubah Jadwal Kegiatan');
+        \LogActivity::addToLog("Mengubah Jadwal Kegiatan");
 
-
+        $events = Event::findOrFail($request->id);
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|unique:events,title,' . $events->id,
             'color' => 'required',
             'description' => 'required|max:30',
+            'id_kategori' => 'required',
             'start_date' => 'required',
             'end_date' => 'required'
         ]);
-        $events = Event::findOrFail($request->id);
         $events->title = $request->title;
         $events->color = $request->color;
         $events->description = $request->description;
+        $events->id_kategori = $request->id_kategori;
         $events->start_date = $request->start_date;
         $events->end_date = $request->end_date;
         $events->save();
@@ -162,7 +166,7 @@ class EventController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        \LogActivity::addToLog('Menghapus Jadwal Kegiatan');
+        \LogActivity::addToLog("Menghapus Jadwal Kegiatan");
 
         $events = Event::findOrFail($request->id);
         if (!Event::destroy($request->id)) {
@@ -177,5 +181,22 @@ class EventController extends Controller
             ];
             return response()->json($response, 200);
         }
+    }
+    public function kat()
+    {
+        $kategori = Kategori::all();
+        $response = [
+            'data'      => $kategori,
+        ];
+        return response()->json($response, 200);
+    }
+
+    public function kateg($id)
+    {
+        $kategori = Kategori::findOrFail($id);
+        $response = [
+            'data'      => $kategori,
+        ];
+        return response()->json($response, 200);
     }
 }

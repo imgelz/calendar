@@ -109,18 +109,24 @@
           </ul>
         </li> --}}
         <li class="active">
-          <a href="{{route('event.index')}}">
+          <a href="{{url('/calendar')}}">
             <i class="fa fa-calendar"></i> <span>Calendar</span>
           </a>
-        </li>
+        </li class="active">
         <li>
           <a href="{{url('/display')}}">
-            <i class="fa fa-table"></i> <span>Data Tables</span>
+            <i class="fa fa-table"></i> <span>Display Tables</span>
           </a>
         </li>
 
             @role('admin')
-        <li>
+        <li class="active">
+          <a href="{{url('admin/kategori')}}">
+            <i class="fa fa-th-large"></i> <span>Kategori</span>
+          </a>
+        </li>
+
+        <li class="active">
           <a href="{{url('admin/logActivity')}}">
             <i class="fa fa-server"></i> <span>Log Activity</span>
           </a>

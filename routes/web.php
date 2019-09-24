@@ -26,9 +26,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     });
     Route::resource('/logActivity', 'LogActivityController');
     Route::delete('/logActivity/{id}', 'LogActivityController@destroy');
+
+    Route::resource('/kategori', 'KategoriController');
+    Route::put('/kategori/{id}', 'KategoriController@update');
+    Route::delete('/kategori/{id}', 'KategoriController@destroy');
 });
 
-Route::resource('/event', 'EventController');
-Route::get('/display', 'EventController@show');
-Route::put('/display/{id}', 'EventController@update');
-Route::delete('/display/{id}', 'EventController@destroy');
+//AdminRoute
+Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
+    Route::get('/', function () {
+        return view('member.dashboard');
+    });
+    Route::get('/display', 'EventController@show');
+    Route::put('/display/{id}', 'EventController@update');
+    Route::delete('/display/{id}', 'EventController@destroy');
+    Route::get('/category', 'EventController@kat');
+    Route::get('/categori/{id}', 'EventController@kateg');
+});
+
+Route::resource('/calendar', 'EventController');

@@ -3,19 +3,11 @@
 @section('content')
 @include('logactivity.delete')
 
-    <section class="content">
+<section class="content">
         <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="alert alert-info">
-                        <center><font color="blue"><h4><b>Log Activity</b></h4></font></center>
-                        {{-- <center>
-                            <h2 class="box-title">
-                                <b><p>Log Aktivitas</p></b>
-                            </h2>
-                        </center> --}}
-                    </div>
-
+            <div class="col-md-12 col-md-offset-">
+                <div class="panel panel-default">
+                    <center><div class="panel-heading" style="background:royalblue; color:skyblue"><h4><b>Log Aktivitas</b></h4></div></center>
                     <div class="box-body">
                         <table id="dataTable" class="table table-striped">
                         <thead>
@@ -31,7 +23,7 @@
                         <tbody class="data-log">
 
                         </tbody>
-                    </table>
+                        </table>
                     </div>
                 </div>
             </div>

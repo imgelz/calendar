@@ -1,28 +1,26 @@
-@extends('layouts.app')
+@extends('layouts.Halaman.calendars')
 
 @section('content')
     @include('calendar.create')
-
-    <!-- Button trigger modal -->
-
-    <center>
-        @if(Auth::check())
-        <button type="button" class="btn btn-primary btn-lg fa fa-plus-square" data-toggle="modal" data-target="#create"> Create</button>
-        @else
-        <a href="/login" class="btn btn-primary btn-lg fa fa-plus-square">Create</a>
-        @endif
-    </center>
         <br>
 
-    <section class="container">
+    <section class="content">
         <div class="box-title"></div>
             <div class="row">
-                <div class="col-md-12 col-md-offset-1">
+                <div class="col-md-12 col-md-offset-">
                     <div class="panel panel-default">
-                        <center><div class="panel-heading" style="background:darkblue; color:aqua"><h3>Calendar</h3></div></center>
-                        <div id="calendar" class="panel-body" style="background:darkseagreen">
+                        <center><div class="panel-heading" style="background:slategray; color:aqua">
+                            <!-- Button trigger modal -->
+                            <center>
+                            @if(Auth::check())
+                            <button type="button" class="btn btn-primary btn-lg fa fa-plus" data-toggle="modal" data-target="#create"> <b>Create</b></button>
+                            @else
+                            {{-- <a href="/login" class="btn btn-primary btn-lg fa fa-plus"> <b>Create</b></a> --}}
+                            @endif
+                        </center>
+                        </div></center>
+                        <div id="calendar" class="panel-body" style="background:silver">
                             {!! $calendar->calendar() !!}
-                            {!! $calendar->script() !!}
                         </div>
                     </div>
                 </div>
@@ -32,6 +30,8 @@
 
 @section('css')
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+    {{-- <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print"> --}}
 @endsection
 
 @section('js')
@@ -40,6 +40,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    {{-- <script src="/adminlte/bower_components/moment/moment.js"></script>
+    <script src="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js"></script> --}}
+    {!! $calendar->script() !!}
     <script type="text/javascript">
         $(function (){
             $.ajaxSetup({
@@ -52,7 +55,7 @@
             tambah.on('submit', function(e) {
                 e.preventDefault();
                 $.ajax({
-                    url: '/event',
+                    url: '/calendar',
                     method: 'POST',
                     data: tambah.serialize(),
                     success: function (res) {

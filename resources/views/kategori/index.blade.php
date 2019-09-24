@@ -1,27 +1,30 @@
-@extends('layouts.Halaman.datatable')
+@extends('layouts.Halaman.kategori')
 @section('content')
-    @include('calendar.edit')
-    @include('calendar.delete')
+
+@include('kategori.edit')
+@include('kategori.delete')
+@include('kategori.create')
+
     <section class="content">
         <div class="row">
-            <div class="col-md-12 col-md-offset-">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <center><div class="panel-heading" style="background:lightgreen; color:red"><h4><b>Jadwal Kegiatan</b></h4></div></center>
+                    <center><div class="panel-heading" style="background:lightgreen">
+                                <h3 class="box-title">
+                                    <button type="button" class="btn btn-success  fa fa-plus-square" data-toggle="modal" data-target="#create-kategori"></button>
+                                </h3>
+                            </div></center>
                     <div class="box-body">
                         <table id="dataTable" class="table table-striped">
                             <thead class="thead">
                                 <tr class="warning">
                                     <th>No</th>
-                                    <th>Judul Meeting</th>
-                                    <th>Kode Warna</th>
-                                    <th>Keterangan</th>
-                                    <th>Kategori</th>
-                                    <th>Waktu Mulai</th>
-                                    <th>Waktu Selesai</th>
+                                    <th>Nama Kategori</th>
+                                    <th>Slug</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                                <tbody class="data-jadwal">
+                                <tbody class="data-kategori">
                                 </tbody>
                         </table>
                     </div>
@@ -49,76 +52,66 @@
             var table = $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ url('/display') }}",
+                ajax: "{{ route('kategori.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'title', name: 'title'},
-                    {data: 'color', name: 'color'},
-                    {data: 'description', name: 'description'},
-                    {data: 'kategori.nama_kategori', name: 'kategori.nama_kategori'},
-                    {data: 'start_date', name: 'start_date'},
-                    {data: 'end_date', name: 'end_date'},
+                    {data: 'nama_kategori', name: 'nama_kategori'},
+                    {data: 'slug', name: 'slug'},
                     {data: 'aksi', name: 'aksi', orderable: false, searchable: false},
                 ]
             });
 
+            //Tambah
+            var tambah = $('#form-tambah-kategori');
+            tambah.on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/admin/kategori',
+                    method: 'POST',
+                    data: tambah.serialize(),
+                    success: function (res) {
+                        swal({
+                            title: "Berhasil Menambah",
+                            icon: "success",
+                        });
+
+                        location.reload();
+                    },
+                    error: function (err) {
+                        console.log(err)
+
+                        if (err.status == 422) {
+                                console.log(err.responseJSON);
+                                $('#success_message').fadeIn().html(err.responseJSON.message);
+                                console.warn(err.responseJSON.errors);
+
+                                $.each(err.responseJSON.errors, function (i, error) {
+                                    var el = $(document).find('[id="'+i+'"]');
+                                    el.after($('<span style="color: red;">'+error[0]+'</span>'));
+                                });
+                            }
+                    }
+                })
+            })
+
             //Edit
-            $('.data-jadwal').on('click', '.edit-jadwal',function (){
-                $('#modal-edit').on('show.bs.modal', function (event) {
+            $('.data-kategori').on('click', '.edit-kategori',function (){
+                $('#edit-kategori').on('show.bs.modal', function (event) {
                     var button = $(event.relatedTarget)
                     var id = button.data('id')
-                    var title = button.data('title')
-                    var color = button.data('color')
-                    var description = button.data('description')
-                    var id_kategori = button.data('id_kategori')
-                    $.ajax({
-                        url: '/category',
-                        method: 'GET',
-                        success:(res) => {
-                            $.ajax({
-                                url: '/categori/'+id_kategori,
-                                method: 'GET',
-                                success:(bes) => {
-                                    $('.e-kategori').html('')
-                                    $.each(res.data, function (k ,v) {
-                                        $('.e-kategori').append(
-                                        `<option value="${v.id}" ${ v.id==bes.data.id ? 'selected':''}> ${v.nama_kategori}</option>`
-                                        )
-                                    })
-                                }
-                            })
-                            console.log(res.data);
-                            $('.e-kategori').html('')
-                            $.each(res.data, function (k ,v) {
-                                $('.e-kategori').append(
-                                `<option value="${v.nama_kategori}">${v.nama_kategori}</option>`
-                                )
-                            })
-                        },
-                        error: (err) => {
-                            console.log(err);
-                        }
-                    })
-
-                    var start_date = button.data('start_data')
-                    var end_date = button.data('end_date')
+                    var nama_kategori = button.data('nama_kategori')
 
                     var modal = $(this)
                     modal.find('#data-id').val(id)
-                    modal.find('#title').val(title)
-                    modal.find('#color').val(color)
-                    modal.find('#description').val(description)
-                    modal.find('#id_kategori').val(id_kategori)
-                    modal.find('#start_date').val(start_date)
-                    modal.find('#end_date').val(end_date)
+                    modal.find('#nama_kategori').val(nama_kategori)
 
                     console.log(id);
 
                 })
             })
                 //Hapus
-                $('.data-jadwal').on('click', '.hapus-jadwal',function (){
-                    $('#modal-hapus').on('show.bs.modal', function (event) {
+                $('.data-kategori').on('click', '.hapus-kategori',function (){
+                    $('#hapus-kategori').on('show.bs.modal', function (event) {
                     var button = $(event.relatedTarget)
                     var id = button.data('id')
 
@@ -130,12 +123,12 @@
                 })
 
                 //SweetAlert Edit
-                $('#form-edit').on('submit', function (e) {
+                $('#form-edit-kategori').on('submit', function (e) {
                 e.preventDefault();
                     $.ajax({
-                        url: '/display/'+ $('#data-id').val(),
+                        url: '/admin/kategori/'+ $('#data-id').val(),
                         method: 'PUT',
-                        data: $('#form-edit').serialize(),
+                        data: $('#form-edit-kategori').serialize(),
                         success: function (res) {
                             swal({
                                 title: "Berhasil Mengubah",
@@ -162,12 +155,12 @@
                 })
 
                 //SweetAlert Hapus
-                $('#form-hapus').on('submit', function (e) {
+                $('#form-hapus-kategori').on('submit', function (e) {
                 e.preventDefault();
                     $.ajax({
-                        url: '/display/'+ $('#data-id-hapus').val(),
+                        url: '/admin/kategori/'+ $('#data-id-hapus').val(),
                         method: 'DELETE',
-                        data: $('#form-hapus').serialize(),
+                        data: $('#form-hapus-kategori').serialize(),
                         success: function (res) {
                             swal({
                                 title: "Berhasil Menghapus",

@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('event', 'Api\EventController');
 
 Route::resource('logActivity', 'Api\LogActivityController');
+
+Route::resource('kategori', 'Api\KategoriController');

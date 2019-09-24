@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" href="/adminlte/dist/img/iconcalendar.png"><title>LogActivity</title>
+  <link rel="icon" href="/adminlte/dist/img/iconcalendar.png"><title>Kategori</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- CSRF Token -->
@@ -46,19 +46,17 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Log Activity
+        Category
         <small>calendar tables</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
-        <li class="active"></li>Log Activity</li>
+        <li class="active">Kategori</li>
       </ol>
     </section>
-
-    <br>
-    <br>
-
+<br>
+<br>
     <!-- Main content -->
     @yield('content')
     <!-- /.content -->

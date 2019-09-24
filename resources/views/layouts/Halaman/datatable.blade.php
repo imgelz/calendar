@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data Tables</title>
+  <link rel="icon" href="/adminlte/dist/img/iconcalendar.png"><title>Display Tables</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- CSRF Token -->
@@ -34,7 +34,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini">
 <div class="wrapper">
 
   @include('layouts.Admin.header')
@@ -46,7 +46,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Tables
+        Display Tables
         <small>calendar tables</small>
       </h1>
       <ol class="breadcrumb">
@@ -55,7 +55,8 @@
         <li class="active">Data tables</li>
       </ol>
     </section>
-
+<br>
+<br>
     <!-- Main content -->
     @yield('content')
     <!-- /.content -->

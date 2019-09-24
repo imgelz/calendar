@@ -2,13 +2,13 @@
 <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Edit Kegiatan</h2>
+            <div class="modal-header" style="background:yellow">
+                <center><h2 class="modal-title">Edit Kegiatan</h2></center>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="background:honeydew">
                 <form id="form-edit">
                             <input type="hidden" name="id" id="data-id" value="">
                             <div class="form-group">
@@ -27,6 +27,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="exampleInputPassword1">Kategori :</label>
+                                <select class="form-control e-kategori" name="id_kategori" id="id_kategori" placeholder="Nama Kategori"></select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="exampleInputPassword1">Waktu Awal :<small style="color:gold">*Harap Salin Data Waktu Akhir Terlebih Dahulu</small></label>
                                 <input id="start_date" type="datetime" class="form-control" name="start_date">
                             </div>
@@ -36,8 +41,7 @@
                             </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary btn-block">Edit & Simpan</button>
             </div>
             </form>
         </div>
