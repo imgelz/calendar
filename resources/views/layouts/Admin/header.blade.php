@@ -1,8 +1,8 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="../index2.html" class="logo">
+    <a href="{{url('/')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>M</b>LT</span>
+      <span class="logo-mini"><b>M</b>SC</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>MEET SCHEDULE</b></span>
     </a>
@@ -229,7 +229,7 @@
 
                 <p>
                  {{ Auth::user()->name }}
-                  <small>{{ Auth::user()->name }} since March. 2003</small>
+                  <small>{{ Auth::user()->email }}</small>
                 </p>
               </li>
               <!-- Menu Body -->

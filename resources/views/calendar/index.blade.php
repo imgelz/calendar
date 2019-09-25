@@ -9,16 +9,28 @@
             <div class="row">
                 <div class="col-md-12 col-md-offset-">
                     <div class="panel panel-default">
-                        <center><div class="panel-heading" style="background:slategray; color:aqua">
+                        <div class="panel-heading" style="background:slategray;">
                             <!-- Button trigger modal -->
-                            <center>
                             @if(Auth::check())
-                            <button type="button" class="btn btn-primary btn-lg fa fa-plus" data-toggle="modal" data-target="#create"> <b>Create</b></button>
+                                <button type="button" title="Buat" style="background:cornflowerblue" class="btn btn-lg fa fa-plus" data-toggle="modal" data-target="#create"> <b>Create</b></button>
+                                <div class="bd-highlight pull-right">
+                                    <form>
+                                        <select class="form-control-lg highlight" style="width:120px" name="id_kategori" id="nama_kategori">
+                                            @php
+                                                $kategori = \App\Kategori::all();
+                                            @endphp
+                                                <option value="">All</option>
+                                            @foreach ($kategori as $data)
+                                                <option value="{{ $data->id }}">{{ $data->nama_kategori }}</option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" style="background:lightblue" class="btn btn-sm highlight">Search</button>
+                                    </form>
+                                </div>
                             @else
-                            {{-- <a href="/login" class="btn btn-primary btn-lg fa fa-plus"> <b>Create</b></a> --}}
+
                             @endif
-                        </center>
-                        </div></center>
+                        </div>
                         <div id="calendar" class="panel-body" style="background:silver">
                             {!! $calendar->calendar() !!}
                         </div>
@@ -82,7 +94,6 @@
                     }
                 })
             })
-
         });
     </script>
 @endsection

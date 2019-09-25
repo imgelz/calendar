@@ -18,11 +18,15 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $events = Event::all();
         $event = [];
 
+        if ($request->id_kategori) {
+            $events = Event::where('id_kategori', $request->id_kategori)->get();
+            $event = [];
+        }
         foreach ($events as $row) {
             $event[] = \Calendar::event(
                 $row->title,
@@ -186,7 +190,7 @@ class EventController extends Controller
     {
         $kategori = Kategori::all();
         $response = [
-            'data'      => $kategori,
+            'data' => $kategori,
         ];
         return response()->json($response, 200);
     }
@@ -195,7 +199,7 @@ class EventController extends Controller
     {
         $kategori = Kategori::findOrFail($id);
         $response = [
-            'data'      => $kategori,
+            'data'  => $kategori,
         ];
         return response()->json($response, 200);
     }

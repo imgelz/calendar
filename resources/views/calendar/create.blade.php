@@ -39,12 +39,12 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group pull-left">
                                 <label for="exampleInputPassword1">Waktu Mulai :</label>
                                 <input type="datetime-local" class="form-control" id="start_date" name="start_date" placeholder="Start Date">
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group pull-right">
                                 <label for="exampleInputPassword1">Waktu Selesai :</label>
                                 <input type="datetime-local" class="form-control" id="end_date" name="end_date" placeholder="End Date">
                             </div>

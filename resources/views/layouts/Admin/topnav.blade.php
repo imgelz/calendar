@@ -60,7 +60,7 @@
 
                         <p>
                         {{ Auth::user()->name }}
-                        <small>{{ Auth::user()->name }} since March. 2003</small>
+                        <small>{{ Auth::user()->email }}</small>
                         </p>
                     </li>
                     <!-- Menu Body -->
@@ -78,7 +78,8 @@
                     </ul>
                 </li>
             @else
-                <a href="/" class="btn btn-primary btn-lg"> <b>LOGIN</b></a>
+                <a href="/" class="btn btn-primary btn-lg"> <b>MASUK</b></a>
+                <a href="/register" class="btn btn-primary btn-lg"><b>DAFTAR</b><a>
             @endif
           </ul>
         </div>

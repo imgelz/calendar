@@ -2,7 +2,7 @@
 
 @section('content')
 <center>
-    <div class="login-box">
+<div class="login-box">
   <div class="login-logo">
     <a href="{{url('/calendar')}}"><b>MEET SCHEDULE</b></a>
   </div>
