@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use LaratrustUserTrait;
     use Notifiable;
+
+    public function event()
+    {
+        return $this->hasMany('App\Event', 'id_user');
+    }
     /**
      * The attributes that are mass assignable.
      *

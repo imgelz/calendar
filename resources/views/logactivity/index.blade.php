@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-12 col-md-offset-">
                 <div class="panel panel-default">
-                    <center><div class="panel-heading" style="background:royalblue; color:skyblue"><h4><b>Log Aktivitas</b></h4></div></center>
+                    <center><div class="panel-heading" style="background:#abdb5a; color:#477008"><h4><b>LOG ACTIVITY</b></h4></div></center>
                     <div class="box-body">
                         <table id="dataTable" class="table table-striped">
                         <thead>

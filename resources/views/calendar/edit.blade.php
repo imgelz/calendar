@@ -2,8 +2,8 @@
 <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header" style="background:yellow">
-                <center><h2 class="modal-title">Edit Kegiatan</h2></center>
+            <div class="modal-header" style="background:#abdb5a">
+                <center><h2 style="color:#477008" class="modal-title">Edit Kegiatan</h2></center>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -23,7 +23,7 @@
 
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Keterangan :</label>
-                                <textarea name="description" id="description" class="form-control" cols="30" rows="5" placeholder="Max 30 Word"></textarea>
+                                <textarea name="description" id="description" class="form-control" cols="30" rows="5" placeholder="Max 50 Word"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Waktu Awal :<small style="color:gold">*Harap Salin Data Waktu Akhir Terlebih Dahulu</small></label>
+                                <label for="exampleInputPassword1">Waktu Awal :</label>
                                 <input id="start_date" type="datetime" class="form-control" name="start_date">
                             </div>
                             <div class="form-group">

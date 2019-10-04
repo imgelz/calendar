@@ -5,6 +5,7 @@
 <div class="login-box">
   <div class="login-logo">
     <a href="{{url('/calendar')}}"><b>MEET SCHEDULE</b></a>
+    <style>.login-logo a{color: #477008;}</style>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

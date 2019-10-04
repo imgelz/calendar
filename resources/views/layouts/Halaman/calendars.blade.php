@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" href="/adminlte/dist/img/iconcalendar.png"><title>Calendar</title>
+  <link rel="icon" href="/adminlte/dist/img/iconkalen.png"><title>Admin | Calendar</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -30,9 +30,14 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+        <style>.skin-green-light .main-header .navbar {background-color: #213602;}</style>
+        <style>.skin-green-light .main-header .logo:hover {background-color: #90c73e; color: #477008;}</style>
+        <style>.skin-green-light .main-header .navbar .sidebar-toggle:hover {background-color: #7bad2d;}</style>
+        <style>.content-wrapper {background-color: #abdb5a;}</style>
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-<body class="hold-transition skin-blue layout-top-nav">
+<body class="hold-transition skin-green-light layout-top-nav">
 <div class="wrapper">
 
   @include('layouts.Admin.topnav')

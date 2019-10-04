@@ -1,4 +1,5 @@
 <aside class="main-sidebar">
+    <style>.skin-green-light .main-sidebar {border-right: 1px solid #b1f547;}</style>
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -8,7 +9,7 @@
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->name }}</p>
-          <a><i class="fa fa-circle text-success"></i>Online</a>
+          <a><i class="fa fa-circle" style="color:#07f527"></i>Online</a>
         </div>
       </div>
       <!-- search form -->
@@ -26,8 +27,8 @@
 
         @guest
         @else
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
+      <ul class="sidebar-menu">
+        <li class="header" style="background:#90c73e; color:#477008">MAIN NAVIGATION</li>
         {{-- <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -108,25 +109,26 @@
             <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
           </ul>
         </li> --}}
-        <li class="active">
+        <li {{ Request::segment(1) == 'calendar'? 'active':''}}>
           <a href="{{url('/calendar')}}">
             <i class="fa fa-calendar"></i> <span>Calendar</span>
           </a>
-        </li class="active">
-        <li>
-          <a href="{{url('/display')}}">
+        </li>
+
+        <li {{ Request::segment(1) == 'admin/display'? 'active':''}}>
+          <a href="{{url('/admin/display')}}">
             <i class="fa fa-table"></i> <span>Display Tables</span>
           </a>
         </li>
 
             @role('admin')
-        <li class="active">
+        <li {{ Request::segment(1) == 'admin/kategori'? 'active':''}}>
           <a href="{{url('admin/kategori')}}">
             <i class="fa fa-th-large"></i> <span>Kategori</span>
           </a>
         </li>
 
-        <li class="active">
+        <li {{ Request::segment(1) == 'admin/logActivity'? 'active':''}}>
           <a href="{{url('admin/logActivity')}}">
             <i class="fa fa-server"></i> <span>Log Activity</span>
           </a>
@@ -185,7 +187,7 @@
           </ul>
         </li> --}}
         {{-- <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li> --}}
-        <li class="header">LABELS</li>
+        <li class="header" style="background:#90c73e; color:#477008"></li>
         {{-- <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> --}}

@@ -5,10 +5,11 @@
 <div class="register-box">
   <div class="register-logo">
     <a href="{{url('/calendar')}}"><b>MEET SCHEDULE</b></a>
+    <style>.register-logo a{color: #477008;}</style>
   </div>
   <!-- /.register-logo -->
     <div class="register-box-body">
-        <p class="login-box-msg">Register Keanggotaan Baru</p>
+        <p class="login-box-msg">Registrasi Keanggotaan Baru</p>
 
         <form method="POST" action="{{ route('register') }}">
             @csrf

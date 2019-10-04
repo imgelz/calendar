@@ -7,6 +7,8 @@ use App\Kategori;
 use Session;
 use Illuminate\Http\Request;
 use DataTables;
+use DateTime;
+use Auth;
 use Yajra\DataTables\Contracts\DataTable;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
@@ -41,7 +43,6 @@ class EventController extends Controller
         }
 
         $calendar = \Calendar::addEvents($event);
-
         return view('calendar.index', compact('events', 'calendar'));
     }
 
@@ -64,12 +65,12 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        \LogActivity::addToLog("Menambah Jadwal Kegiatan");
+        \LogActivity::addToLog("Menambah Jadwal Kegiatan " . $request->title);
 
         $request->validate([
             'title' => 'required|unique:events',
             'color' => 'required|unique:events',
-            'description' => 'required|max:30',
+            'description' => 'required|max:50',
             'id_kategori' => 'required',
             'start_date' => 'required',
             'end_date' => 'required'
@@ -81,6 +82,7 @@ class EventController extends Controller
         $events->id_kategori = $request->id_kategori;
         $events->start_date = $request->start_date;
         $events->end_date = $request->end_date;
+        $events->id_user = Auth::user()->id;
         $events->save();
 
         $response = [
@@ -135,13 +137,13 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        \LogActivity::addToLog("Mengubah Jadwal Kegiatan");
+        \LogActivity::addToLog("Mengubah Jadwal Kegiatan " . $request->title);
 
         $events = Event::findOrFail($request->id);
         $this->validate($request, [
             'title' => 'required|unique:events,title,' . $events->id,
             'color' => 'required',
-            'description' => 'required|max:30',
+            'description' => 'required|max:50',
             'id_kategori' => 'required',
             'start_date' => 'required',
             'end_date' => 'required'
@@ -152,6 +154,7 @@ class EventController extends Controller
         $events->id_kategori = $request->id_kategori;
         $events->start_date = $request->start_date;
         $events->end_date = $request->end_date;
+        $events->id_user = Auth::user()->id;
         $events->save();
 
         $response = [
@@ -170,7 +173,7 @@ class EventController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        \LogActivity::addToLog("Menghapus Jadwal Kegiatan");
+        \LogActivity::addToLog("Menghapus Jadwal Kegiatan " . $request->title);
 
         $events = Event::findOrFail($request->id);
         if (!Event::destroy($request->id)) {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" href="/adminlte/dist/img/iconcalendar.png"><title>Display Tables</title>
+  <link rel="icon" href="/adminlte/dist/img/icondisplay.png"><title>Admin | Display Tables</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- CSRF Token -->
@@ -31,10 +31,14 @@
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+        <style>.skin-green-light .main-header .navbar {background-color: #90c73e;}</style>
+        <style>.skin-green-light .main-header .logo:hover {background-color: #90c73e; color: #477008;}</style>
+        <style>.skin-green-light .main-header .navbar .sidebar-toggle:hover {background-color: #7bad2d;}</style>
+
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body class="hold-transition skin-green-light sidebar-mini">
 <div class="wrapper">
 
   @include('layouts.Admin.header')

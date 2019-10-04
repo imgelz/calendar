@@ -2,7 +2,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="{{url('/calendar')}}" class="navbar-brand"><b>MEET SCHEDULE</b></a>
+          <a href="{{url('/calendar')}}" style="color:#abdb5a" class="navbar-brand"><b>MEET SCHEDULE</b></a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -13,8 +13,8 @@
           <ul class="nav navbar-nav">
             {{-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> --}}
             @if(Auth::check())
-                <li><a href="{{url('/display')}}">Display Table</a></li>
                 @role('admin')
+                    <li><a href="{{url('/admin/display')}}">Display Table</a></li>
                     <li><a href="{{url('/admin/kategori')}}">Kategori</a></li>
                     <li><a href="{{url('/admin/logActivity')}}">Log Activity</a></li>
                 @endrole
@@ -55,17 +55,17 @@
                     </a>
                     <ul class="dropdown-menu">
                     <!-- User image -->
-                    <li class="user-header">
+                    <li class="user-header" style="background:#d9fca4">
                         <img src="/adminlte/dist/img/avatar5.png" class="img-circle" alt="User Image">
 
-                        <p>
+                        <p style="color:#477008">
                         {{ Auth::user()->name }}
                         <small>{{ Auth::user()->email }}</small>
                         </p>
                     </li>
                     <!-- Menu Body -->
                     <!-- Menu Footer-->
-                    <li class="user-footer" style="background:lightblue">
+                    <li class="user-footer" style="background:#477008">
                         <div class="pull-left">
                         </div>
                         <div class="pull-right">
@@ -78,8 +78,9 @@
                     </ul>
                 </li>
             @else
-                <a href="/" class="btn btn-primary btn-lg"> <b>MASUK</b></a>
-                <a href="/register" class="btn btn-primary btn-lg"><b>DAFTAR</b><a>
+
+                <a href="/login" class="btn btn-primary-outline btn-lg" style="color:#abdb5a"> <b>MASUK</b></a>
+                <a href="/register" class="btn btn-primary-outline btn-lg" style="color:#abdb5a"><b>DAFTAR</b><a>
             @endif
           </ul>
         </div>

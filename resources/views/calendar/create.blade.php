@@ -1,9 +1,9 @@
 <!-- Modal -->
 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="background:springgreen">
-                <center><h3 class="modal-title">Tambah Jadwal Kegiatan</h3></center>
+        <div class="modal-content" style="border-radius:9px">
+            <div class="modal-header" style="background:#abdb5a">
+                <center><h3 style="color:#477008" class="modal-title">Tambah Jadwal Kegiatan</h3></center>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -23,7 +23,7 @@
 
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Keterangan :</label>
-                                <textarea name="description" id="description" class="form-control" cols="10" rows="2" placeholder="Max 30 Word"></textarea>
+                                <textarea name="description" id="description" class="form-control" cols="10" rows="2" placeholder="Max 50 Word"></textarea>
                             </div>
 
                             <div class="form-group">

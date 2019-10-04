@@ -28,7 +28,7 @@ class HomeController extends Controller
             return redirect('/admin');
         }
         if (Laratrust::hasRole('member')) {
-            return redirect('home');
+            return redirect('/');
         }
     }
 }

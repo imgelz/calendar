@@ -1,6 +1,7 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{url('/')}}" class="logo">
+    <a href="{{url('/admin')}}" class="logo">
+        <style>.skin-green-light .main-header .logo {background-color: #90c73e; color: #477008;}</style>
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>M</b>SC</span>
       <!-- logo for regular state and mobile devices -->
@@ -10,6 +11,7 @@
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <style>.sidebar-toggle:hover {background-color: #90c73e;}</style>
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -224,17 +226,17 @@
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
-              <li class="user-header">
+              <li class="user-header" style="background:#d9fca4">
                 <img src="/adminlte/dist/img/avatar5.png" class="img-circle" alt="User Image">
 
-                <p>
+                <p style="color:#477008">
                  {{ Auth::user()->name }}
                   <small>{{ Auth::user()->email }}</small>
                 </p>
               </li>
               <!-- Menu Body -->
               <!-- Menu Footer-->
-              <li class="user-footer" style="background:lightblue">
+              <li class="user-footer" style="background:#477008">
                 <div class="pull-left">
                 </div>
                 <div class="pull-right">

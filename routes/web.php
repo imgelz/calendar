@@ -12,7 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.Halamanfrontend.frontend');
+});
+
+Route::get('/categories', function () {
+    return view('frontend.category');
+});
+
+Route::get('/display', function () {
+    return view('frontend.display');
 });
 
 Auth::routes();
@@ -30,13 +38,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::resource('/kategori', 'KategoriController');
     Route::put('/kategori/{id}', 'KategoriController@update');
     Route::delete('/kategori/{id}', 'KategoriController@destroy');
-});
-
-//AdminRoute
-Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
-    Route::get('/', function () {
-        return view('member.dashboard');
-    });
     Route::get('/display', 'EventController@show');
     Route::put('/display/{id}', 'EventController@update');
     Route::delete('/display/{id}', 'EventController@destroy');

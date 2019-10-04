@@ -11,7 +11,7 @@
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <center>
-                <div class="widget-user-header bg-aqua-active">
+                <div class="widget-user-header" style="background:#90c73e">
                 <h1><b> Welcome to the Dashboard, Member! </b></h1>
                 <small style="color:gold">You are logged in and cannot access all pages, and if there is something you want to access, contact the admin</small>
                 </div>
@@ -42,7 +42,7 @@
           <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <center>
-            <div class="widget-user-header bg-aqua-active">
+            <div class="widget-user-header" style="background:#90c73e">
               <h1><b> Welcome to the Dashboard, Admin! </b></h1>
               <small>You are logged in and can access all pages, and those who enter other than you cannot access all pages !</small>
             </div>

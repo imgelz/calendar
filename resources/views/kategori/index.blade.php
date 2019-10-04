@@ -7,11 +7,11 @@
 
     <section class="content">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12 col-md-offset">
                 <div class="panel panel-default">
-                    <center><div class="panel-heading" style="background:lightgreen">
+                    <center><div class="panel-heading" style="background:#abdb5a">
                                 <h3 class="box-title">
-                                    <button type="button" class="btn btn-success  fa fa-plus-square" data-toggle="modal" data-target="#create-kategori"></button>
+                                    <button type="button" style="background:#477008; color:#d9fca4" class="btn btn-block fa fa-plus-circle" data-toggle="modal" data-target="#create-kategori"> Tambah</button>
                                 </h3>
                             </div></center>
                     <div class="box-body">
@@ -21,6 +21,8 @@
                                     <th>No</th>
                                     <th>Nama Kategori</th>
                                     <th>Slug</th>
+                                    <th>Foto</th>
+                                    <th>Keterangan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -57,6 +59,8 @@
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'nama_kategori', name: 'nama_kategori'},
                     {data: 'slug', name: 'slug'},
+                    {data: 'img', name: 'img', orderable: false, searchable: false},
+                    {data: 'keterangan', name: 'keterangan'},
                     {data: 'aksi', name: 'aksi', orderable: false, searchable: false},
                 ]
             });
@@ -65,10 +69,15 @@
             var tambah = $('#form-tambah-kategori');
             tambah.on('submit', function(e) {
                 e.preventDefault();
+                var formData = new FormData($(this)[0]);
                 $.ajax({
                     url: '/admin/kategori',
                     method: 'POST',
-                    data: tambah.serialize(),
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    data: formData,
+                    dataType: "text",
                     success: function (res) {
                         swal({
                             title: "Berhasil Menambah",
@@ -76,6 +85,7 @@
                         });
 
                         location.reload();
+
                     },
                     error: function (err) {
                         console.log(err)
@@ -89,7 +99,7 @@
                                     var el = $(document).find('[id="'+i+'"]');
                                     el.after($('<span style="color: red;">'+error[0]+'</span>'));
                                 });
-                            }
+                        }
                     }
                 })
             })
@@ -100,10 +110,14 @@
                     var button = $(event.relatedTarget)
                     var id = button.data('id')
                     var nama_kategori = button.data('nama_kategori')
+                    var foto = button.data('foto')
+                    var keterangan = button.data('keterangan')
 
                     var modal = $(this)
                     modal.find('#data-id').val(id)
                     modal.find('#nama_kategori').val(nama_kategori)
+                    modal.find('#foto').attr('src','/assets/img/kategori/'+foto)
+                    modal.find('#keterangan').val(keterangan)
 
                     console.log(id);
 

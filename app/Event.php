@@ -14,6 +14,11 @@ class Event extends Model
         return $this->belongsTo('App\Kategori', 'id_kategori');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'id_user');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

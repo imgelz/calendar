@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12 col-md-offset-">
                 <div class="panel panel-default">
-                    <center><div class="panel-heading" style="background:lightgreen; color:red"><h4><b>Jadwal Kegiatan</b></h4></div></center>
+                    <center><div class="panel-heading" style="background:#abdb5a; color:#477008"><h4><b>DAFTAR JADWAL KEGIATAN</b></h4></div></center>
                     <div class="box-body">
                         <table id="dataTable" class="table table-striped">
                             <thead class="thead">
@@ -49,7 +49,7 @@
             var table = $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ url('/display') }}",
+                ajax: "{{ url('/admin/display') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'title', name: 'title'},
@@ -72,11 +72,11 @@
                     var description = button.data('description')
                     var id_kategori = button.data('id_kategori')
                     $.ajax({
-                        url: '/category',
+                        url: '/admin/category',
                         method: 'GET',
                         success:(res) => {
                             $.ajax({
-                                url: '/categori/'+id_kategori,
+                                url: '/admin/categori/'+id_kategori,
                                 method: 'GET',
                                 success:(bes) => {
                                     $('.e-kategori').html('')
@@ -100,7 +100,7 @@
                         }
                     })
 
-                    var start_date = button.data('start_data')
+                    var start_date = button.data('start_date')
                     var end_date = button.data('end_date')
 
                     var modal = $(this)
@@ -133,7 +133,7 @@
                 $('#form-edit').on('submit', function (e) {
                 e.preventDefault();
                     $.ajax({
-                        url: '/display/'+ $('#data-id').val(),
+                        url: '/admin/display/'+ $('#data-id').val(),
                         method: 'PUT',
                         data: $('#form-edit').serialize(),
                         success: function (res) {
@@ -165,7 +165,7 @@
                 $('#form-hapus').on('submit', function (e) {
                 e.preventDefault();
                     $.ajax({
-                        url: '/display/'+ $('#data-id-hapus').val(),
+                        url: '/admin/display/'+ $('#data-id-hapus').val(),
                         method: 'DELETE',
                         data: $('#form-hapus').serialize(),
                         success: function (res) {
