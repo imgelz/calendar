@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>MEET SCHEDULE | Home</title>
+  <title>MEET SCHEDULE | Meeting Schedule Sourcing</title>
 	<link rel="icon" href="/frontend/img/logomeets.png" type="image/png">
 
   <link rel="stylesheet" href="/frontend/vendors/bootstrap/bootstrap.min.css">
@@ -21,16 +21,20 @@
   <style>.card-feature {border:1px solid rgba(0,0,0,0.125); border-radius: 15px;}</style>
   <style>.card-feature:hover {background: #ededed; box-shadow: 0px 15px 15px 0px rgba(144, 148, 139); border-radius: 15px;}</style>
   <style>.body {color:black;}</style>
+  <style>.logo-carousel .owl-item img {width: 180px; height: 150px;}</style>
   <style>.footer-area .footer-bottom .footer-social a {color: #90c73e;}</style>
   <style>.footer-area .footer-bottom .footer-social a:hover {color: #d1fc97;}</style>
   <style>.footer-area .single-footer-widget h4 {color: #90c73e;}</style>
-  <style>.hero-banner {background: url(/frontend/img/banner/achievement.jpg) left center no-repeat;}</style>
-  <style>.hero-banner::after {opacity: .7;}</style>
+  <style>.hero-banner {background: url(/frontend/img/banner/meeting_banner.jpg) left center no-repeat;}</style>
+  <style>.hero-banner::after {opacity: .6;}</style>
   <style>.button:hover {background-color: #fff; border-color: #000000; color: #90c73e;}</style>
   <style>.card-pricing {background: #ededed; border-radius: 13px; border: 1px solid rgba(0,0,0,0.125);}</style>
   <style>.card-pricing:hover {transition: all ease-in .2s; transform: scale(1.05);}</style>
   <style>.card-pricing .button {color: #90c73e; border: 1px solid #90c73e;}</style>
   <style>.card-pricing:hover .button {background: linear-gradient(to right, #90c73e 0%, #90c73e 100%);}</style>
+  <style>.header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link {background-color: #90c73e;}</style>
+  <style>.hero-banner::after, .priceTable-bg::after {opacity: .6;}</style>
+  <style>.priceTable-bg {background: url(/frontend/img/home/home_meeting.jpg) left center no-repeat;}</style>
 </head>
 <body>
 
@@ -45,7 +49,13 @@
       <p class="text-uppercase">Pertemuan Dengan Ruang Sempurna</p>
       <h1>meeting schedule</h1>
       <p class="hero-subtitle">Make a schedule for starting your activities with meetings, and make the meeting useful for you and the people around you</p>
-      <a class="button button-outline" href="#">Get Started</a>
+      {{-- @if(Auth::check())
+      @else
+      <a class="button button-outline" href="/login">Sign In</a>
+      <a class="button button-outline" href="/register">Sign Up</a>
+      <p>____________________________________________</p>
+      <p>Log In to see more !</p>
+      @endif --}}
     </div>
   </section>
   <!--================ Banner Section end =================-->
@@ -69,7 +79,7 @@
           <img class="img-fluid" src="/frontend/img/home/logo_bootstrap.png" alt="">
         </div>
         <div class="logo-carousel-item">
-          <img class="img-fluid" src="/frontend/img/home/brand-logo5.png" alt="">
+          <img class="img-fluid" src="/frontend/img/home/colorlib.png" alt="">
         </div>
       </div>
     </div>
@@ -86,7 +96,7 @@
   <section class="section-padding priceTable-bg">
     <div class="container">
       <div class="section-intro-white pb-85px text-center">
-        <h2>Popular Pricing Package</h2>
+        <h2>Create Your Meeting To The Right Business</h2>
         <div class="section-style"></div>
       </div>
 
@@ -114,17 +124,17 @@
             <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
               <div class="card text-center card-pricing">
                 <div class="card-pricing__header">
-                  <h4>CATEGORY BASED</h4>
+                  <h4>PROVISION CATEGORY</h4>
                   <p>Pay attention to your category</p>
                     <img src="/frontend/img/home/png/backend.png" width="150px" alt="">
                 </div>
                 <ul class="card-pricing__list">
                   <p style="color:black" class="text-center font-weight-normal">
-                    We provide several categories that you can use when creating your activity schedule. Contact us if there is a discrepancy with the availability of categories
+                    We provide group features for where you participate with your friends, and the data displayed is data that your group added. and other people can't see your group data
                 </p>
                 </ul>
                 <div class="card-pricing__footer">
-                  <button class="button">Select Plan</button>
+                    <a href="{{url('/categories')}}"><button class="button">Select Plan</button></a>
                 </div>
               </div>
             </div>
@@ -138,8 +148,7 @@
                 </div>
                 <ul class="card-pricing__list">
                   <p style="color:black" class="text-center font-weight-normal">
-                    Quickly transform a conference room into a collaboration center with web meeting schedules. Turn your online event into an exciting experience that you will look forward to.
-                  </p>
+                    Quickly create a meeting schedule with this web with calendar. Turn your online event into an exciting experience that you will have been waiting for.                  </p>
                 </ul>
                 <div class="card-pricing__footer">
                   <button class="button">Select Plan</button>
@@ -195,6 +204,7 @@
             <section class="section-margin text-center">
                 <h2 style="color:#90c73e">Happy Web Devlopment Says</h2>
                     <div class="section-style"></div>
+                    <br>
                 <div class="container">
                 <div class="row">
                     <br><br>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>MEET SCHEDULE | Display</title>
     <link rel="icon" href="/frontend/img/logomeets.png" type="image/png">
 
@@ -16,7 +17,6 @@
 
   <style>.hero-banner::after, .priceTable-bg::after {background: linear-gradient(to right, #000000 0%, #000000 100%);}</style>
   <style>.header_area.navbar_fixed .main_menu .navbar {background: #90c73e;}</style>
-  <style>.button:hover {background-color: #90c73e; border-color: #000000; color: #fff;}</style>
   <style>.card-feature:hover {background: #d8f5ae; box-shadow: 0px 20px 20px 0px rgba(144, 148, 139);}</style>
   <style>.body {color:black;}</style>
   <style>.footer-area .footer-bottom .footer-social a {color: #90c73e;}</style>
@@ -24,10 +24,13 @@
   <style>.footer-area .single-footer-widget h4 {color: #90c73e;}</style>
   <style>.hero-banner {background: url(/frontend/img/banner/display.png) left center no-repeat;}</style>
   <style>.hero-banner::after {opacity: .7;}</style>
-  <style>.button:hover {background-color: #fff; border-color: #000000; color: #90c73e;}</style>
+    <style>.button {background-color: #fff; border: 2px solid #ededed; color: #90c73e; }</style>
+  <style>.button:hover {background-color: #fff; border-color: #000000; color: #90c73e; transition: all ease-in .2s; transform: scale(1.05);}</style>
   <style>.card-feature {background: #ededed; border-radius: 15px;}</style>
-  <style>.card-service {border: 1px solid #ededed; border-radius: 15px;}</style>
-  <style>.card-service:hover {background: #ededed; transition: all ease-in .2s; transform: scale(1.05);}</style>
+  <style>.card-service {border: 2px solid #ededed; border-radius: 15px;}</style>
+  <style>.card-service:hover {background: #ededed; transition: all ease-in .2s; transform: scale(1.05); box-shadow:0px 0px 0px 0px rgba(40,25,114,0.1);}</style>
+  <style>.pagination {margin-left: 40em;}</style>
+  <style>.header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link {background-color: #90c73e;}</style>
 </head>
 <body>
 

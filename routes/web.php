@@ -10,31 +10,47 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Universal Route = Frontend
 
 Route::get('/', function () {
     return view('layouts.Halamanfrontend.frontend');
 });
 
-Route::get('/categories', function () {
-    return view('frontend.category');
-});
+Route::get('/categories', 'FrontendController@kategori');
 
-Route::get('/display', function () {
-    return view('frontend.display');
-});
+// Route::get('/calendars', function () {
+//     return view('frontend.calendar');
+// });
+
+// Route::get('/contact', function () {
+//     return view('frontend.contact');
+// });
+
+Route::get('/display', 'FrontendController@display')->middleware('auth');
+
+Route::resource('/calendar', 'EventController');
+Route::resource('/contact', 'ContactController');
+
+Route::get('/activity', 'FrontendController@activity')->middleware('auth');
+
+Route::put('/display/{id}', 'EventController@update');
+Route::delete('/display/{id}', 'EventController@destroy');
+Route::get('/category', 'EventController@kat');
+Route::get('/categori/{id}', 'EventController@kateg');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//AdminRoute
+//AdminRoute = Backend
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     Route::get('/', function () {
         return view('admin.index');
     });
     Route::resource('/logActivity', 'LogActivityController');
     Route::delete('/logActivity/{id}', 'LogActivityController@destroy');
-
+    Route::get('/contact', 'ContactController@show');
+    Route::delete('/contact/{id}', 'ContactController@destroy');
     Route::resource('/kategori', 'KategoriController');
     Route::put('/kategori/{id}', 'KategoriController@update');
     Route::delete('/kategori/{id}', 'KategoriController@destroy');
@@ -44,5 +60,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::get('/category', 'EventController@kat');
     Route::get('/categori/{id}', 'EventController@kateg');
 });
-
-Route::resource('/calendar', 'EventController');

@@ -1,26 +1,24 @@
-@extends('layouts.Halaman.logactivity')
+@extends('layouts.Halaman.contact')
 
 @section('content')
-@include('logactivity.delete')
+@include('contact.modal')
 
 <section class="content">
         <div class="row">
             <div class="col-md-12 col-md-offset-">
                 <div class="panel panel-default">
-                    <center><div class="panel-heading" style="background:#abdb5a; color:#477008"><h4><b>LOG ACTIVITY</b></h4></div></center>
+                    <center><div class="panel-heading" style="background:#abdb5a; color:#477008"><h4><b>Message</b></h4></div></center>
                     <div class="box-body">
                         <table id="dataTable" class="table table-striped">
                         <thead>
                             <th>No</th>
                             <th>Subject</th>
-                            <th>URL</th>
-                            <th>Method</th>
-                            <th>IP</th>
-                            <th width="300px">User Agent</th>
-                            <th>User</th>
+                            <th>Message</th>
+                            <th>Name</th>
+                            <th>Email</th>
                             <th>Aksi</th>
                         </thead>
-                        <tbody class="data-log">
+                        <tbody class="data-contact">
 
                         </tbody>
                         </table>
@@ -48,22 +46,20 @@
             var table = $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('logActivity.index') }}",
+                ajax: "{{ url('/admin/contact') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'subject', name: 'subject'},
-                    {data: 'url', name: 'url'},
-                    {data: 'method', name: 'method'},
-                    {data: 'ip', name: 'ip'},
-                    {data: 'agent', name: 'agent'},
+                    {data: 'message', name: 'message'},
                     {data: 'user.name', name: 'user.name'},
+                    {data: 'user.email', name: 'user.email'},
                     {data: 'aksi', name: 'aksi', orderable: false, searchable: false},
                 ]
             });
 
             //Hapus
-                $('.data-log').on('click', '.hapus-log',function (){
-                    $('#hapus-log').on('show.bs.modal', function (event) {
+                $('.data-contact').on('click', '.hapus-contact',function (){
+                    $('#hapus-contact').on('show.bs.modal', function (event) {
                     var button = $(event.relatedTarget)
                     var id = button.data('id')
 
@@ -75,10 +71,10 @@
                 })
 
             //SweetAlert Hapus
-                $('#form-hapus-log').on('submit', function (e) {
+                $('#form-hapus-contact').on('submit', function (e) {
                 e.preventDefault();
                     $.ajax({
-                        url: '/admin/logActivity/'+ $('#data-id-hapus').val(),
+                        url: '/admin/contact/'+ $('#data-id-hapus').val(),
                         method: 'DELETE',
                         data: $('#form-hapus-log').serialize(),
                         success: function (res) {

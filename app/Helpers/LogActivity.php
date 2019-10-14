@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Request;
 use App\LogActivity as LogActivityModel;
+use Auth;
 
 class LogActivity
 {
@@ -15,7 +16,7 @@ class LogActivity
         $log['method'] = Request::method();
         $log['ip'] = Request::ip();
         $log['agent'] = Request::header('user-agent');
-        $log['user_name'] = auth()->check() ? auth()->user()->name : '';
+        $log['id_user'] = Auth::user()->id;
         LogActivityModel::create($log);
     }
 

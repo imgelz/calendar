@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LogActivity extends Model
+class Contact extends Model
 {
-    protected $fillable = ['subject', 'url', 'method', 'ip', 'agent', 'id_user'];
+    protected $fillable = ['subject', 'message', 'id_user'];
     public $timestamps = true;
 
     public function user()

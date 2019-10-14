@@ -4,7 +4,7 @@
 				<div class="col-xl-3 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
 					<h4>About Us</h4>
           <p>Web Meeting by Meet Schedule - Online meetings that help you share work and ideas quickly.</p>
-          <a class="navbar-brand logo_h d-none d-xl-block" href="index.html"><img src="/frontend/img/logo.png" alt=""></a>
+          <a class="navbar-brand logo_h d-none d-xl-block" href="index.html"><img src="/frontend/img/meetschedule.png" width="230px" alt=""></a>
 				</div>
 				<div class="col-xl-3 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
 					<h4>Contact Info</h4>
@@ -34,7 +34,7 @@
               <div class="input-group">
                 <input type="email" class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '">
                 <div class="input-group-append">
-                  <button class="btn click-btn" type="submit">
+                  <button style="background:#90c73e" class="btn click-btn" type="submit">
                     <i class="ti-arrow-right"></i>
                   </button>
                 </div>

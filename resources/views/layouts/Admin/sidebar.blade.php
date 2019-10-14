@@ -121,10 +121,15 @@
           </a>
         </li>
 
-            @role('admin')
         <li {{ Request::segment(1) == 'admin/kategori'? 'active':''}}>
           <a href="{{url('admin/kategori')}}">
             <i class="fa fa-th-large"></i> <span>Kategori</span>
+          </a>
+        </li>
+
+        <li {{ Request::segment(1) == 'admin/contact'? 'active':''}}>
+          <a href="{{url('admin/contact')}}">
+            <i class="fa fa-envelope"></i> <span>Message</span>
           </a>
         </li>
 
@@ -133,7 +138,6 @@
             <i class="fa fa-server"></i> <span>Log Activity</span>
           </a>
         </li>
-        @endrole
         {{-- <li class="treeview">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Examples</span>

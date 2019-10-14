@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLogActivitiesTable extends Migration
+class CreateGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateLogActivitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('log_activities', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('subject');
-            $table->string('url');
-            $table->string('method');
-            $table->string('ip');
-            $table->string('agent')->nullable();
-            $table->unsignedBigInteger('id_user');
+            $table->string('nama_grup');
+            $table->string('kode');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateLogActivitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_activities');
+        Schema::dropIfExists('groups');
     }
 }

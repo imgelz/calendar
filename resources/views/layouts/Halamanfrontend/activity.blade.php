@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>MEET SCHEDULE | Category</title>
+  <title>MEET SCHEDULE | Activity</title>
     <link rel="icon" href="/frontend/img/logomeets.png" type="image/png">
 
   <link rel="stylesheet" href="/frontend/vendors/bootstrap/bootstrap.min.css">
@@ -28,6 +27,7 @@
   <style>.button:hover {background-color: #fff; border-color: #000000; color: #90c73e;}</style>
   {{-- <style>*, ::after, ::before {box-sizing: border-box; border-radius: 15px;}</style> --}}
   <style>.card-feature {background: #fff; border-radius: 15px; border: 2px solid #ededed;}</style>
+    <style>.pagination {margin-left: 40em;}</style>
     <style>.header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link {background-color: #90c73e;}</style>
 
 </head>
@@ -41,11 +41,11 @@
   <!--================ Banner SM Section start =================-->
   <section class="hero-banner hero-banner-sm text-center">
     <div class="container">
-      <h1>Categories</h1>
+      <h1>Log Activities</h1>
       <nav aria-label="breadcrumb" class="banner-breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Category</li>
+          <li class="breadcrumb-item active" aria-current="page">Activity</li>
         </ol>
       </nav>
     </div>
@@ -55,7 +55,7 @@
   <!--================ Feature section start =================-->
     <br><br>
   <section class="text-center">
-        <h2 style="color:#90c73e">Category</h2>
+        <h2 style="color:#90c73e">User Activities</h2>
         <div class="section-style"></div>
 
         @yield('content')

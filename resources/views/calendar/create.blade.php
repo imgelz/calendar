@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog " role="document">
         <div class="modal-content" style="border-radius:9px">
             <div class="modal-header" style="background:#abdb5a">
                 <center><h3 style="color:#477008" class="modal-title">Tambah Jadwal Kegiatan</h3></center>
@@ -13,7 +13,7 @@
                         <input type="hidden" name="id" id="id" value="">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Nama Kegiatan :</label>
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                                <input type="text" class="form-control" id="title" name="title" autocomplete="off" placeholder="Title">
                             </div>
 
                             <div class="form-group">
@@ -39,14 +39,14 @@
                                 </select>
                             </div>
 
-                            <div class="form-group pull-left">
+                            <div class="form-group">
                                 <label for="exampleInputPassword1">Waktu Mulai :</label>
-                                <input type="datetime-local" class="form-control" id="start_date" name="start_date" placeholder="Start Date">
+                                <input type="datetime-local" class="form-control" id="start_date" name="start_date" width="auto">
                             </div>
 
-                            <div class="form-group pull-right">
+                            <div class="form-group">
                                 <label for="exampleInputPassword1">Waktu Selesai :</label>
-                                <input type="datetime-local" class="form-control" id="end_date" name="end_date" placeholder="End Date">
+                                <input type="datetime-local" class="form-control" id="end_date" name="end_date" width="auto">
                             </div>
                 </div>
                 <div class="modal-footer">

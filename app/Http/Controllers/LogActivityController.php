@@ -16,11 +16,11 @@ class LogActivityController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $logActivity = LogActivity::latest()->get();
+            $logActivity = LogActivity::with('user')->latest()->get();
             return Datatables::of($logActivity)
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($row) {
-                    $btn = '<button type="button" class="hapus-log btn btn-danger btn-sm" data-id="' . $row->id . '" data-subject="' . $row->subject . '" data-url="' . $row->url . '" data-method="' . $row->method . '" data-ip="' . $row->ip . '" data-agent="' . $row->agent . '" data-user_name="' . $row->user_name . '" data-toggle="modal" data-target="#hapus-log"><i class="fa fa-trash-o"></i></button>';
+                    $btn = '<button type="button" class="hapus-log btn btn-danger btn-sm" data-id="' . $row->id . '" data-subject="' . $row->subject . '" data-url="' . $row->url . '" data-method="' . $row->method . '" data-ip="' . $row->ip . '" data-agent="' . $row->agent . '" data-user_name="' . $row->id_user . '" data-toggle="modal" data-target="#hapus-log"><i class="fa fa-trash-o"></i></button>';
                     return $btn;
                 })
                 ->rawColumns(['aksi'])

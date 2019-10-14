@@ -45,6 +45,21 @@
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                 </div>
 
+                <div id="form-input-radio">
+                    <label><small>Masukkan kode jika sudah punya grup</small></label>
+                    <input type="text" class="form-control" name="akses_group" placeholder="Masukkan Kode Group">
+                </div>
+                <br>
+
+                <div>
+                    <label>Buat Group ? </label><br>
+                    <label class="switch">
+                        <input type="checkbox" id="pilihan" name="pilih" value="buat">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <br>
+
                 <div class="row">
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
@@ -62,78 +77,89 @@
     </div>
   <!-- /.register-box-body -->
 </div>
-
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 @endsection
+
+@section('js')
+<script>
+    $(document).ready(function(){
+        // $("#form-input").css("display","none"); //Menghilangkan form-input ketika pertama kali dijalankan
+        $("#pilihan").click(function(){ //Memberikan even ketika class detail di klik (class detail ialah class radio button)
+            if ($("input[name='pilih']:checked").val() == "buat" ) { //Jika radio button "berbeda" dipilih maka tampilkan form-inputan
+            $("#form-input-radio").html(""); //Efek Slide Down (Menampilkan Form Input)
+            $("#form-input-radio").append(`<label><small>Silahkan masukkan nama dan kode grup anda</small></label>
+                    <input type="text" name="nama_group" class="form-control" placeholder="Nama Grup"><br>
+                    <input type="text" class="form-control" name="kode_group" placeholder="Kode Akses Grup">`);
+            } else {
+            $("#form-input-radio").html(""); //Efek Slide Up (Menghilangkan Form Input)
+            $("#form-input-radio").append(`<label><small>Masukkan kode jika sudah punya grup</small></label>
+                                            <input type="text" name="akses_group" class="form-control" placeholder="Masukkan Kode Grup">`);
+            }
+            console.log();
+
+        });
+    });
+</script>
+@endsection
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>

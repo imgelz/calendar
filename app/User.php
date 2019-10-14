@@ -17,6 +17,16 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Event', 'id_user');
     }
+
+    public function log()
+    {
+        return $this->hasMany('App\LogActivity', 'id_user');
+    }
+
+    public function contact()
+    {
+        return $this->hasMany('App\Contact', 'id_user');
+    }
     /**
      * The attributes that are mass assignable.
      *
