@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    //
+    protected $fillable = ['nama_grup', 'kode'];
+    public $timestamps = true;
+
+    public function user()
+    {
+        return $this->hasMany('App\User', 'id_group');
+    }
 }

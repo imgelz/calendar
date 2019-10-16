@@ -26,14 +26,14 @@
   <style>.footer-area .footer-bottom .footer-social a:hover {color: #d1fc97;}</style>
   <style>.footer-area .single-footer-widget h4 {color: #90c73e;}</style>
   <style>.hero-banner {background: url(/frontend/img/banner/meeting_banner.jpg) left center no-repeat;}</style>
-  <style>.hero-banner::after {opacity: .6;}</style>
+  <style>.hero-banner::after {opacity: .7;}</style>
   <style>.button:hover {background-color: #fff; border-color: #000000; color: #90c73e;}</style>
   <style>.card-pricing {background: #ededed; border-radius: 13px; border: 1px solid rgba(0,0,0,0.125);}</style>
   <style>.card-pricing:hover {transition: all ease-in .2s; transform: scale(1.05);}</style>
   <style>.card-pricing .button {color: #90c73e; border: 1px solid #90c73e;}</style>
   <style>.card-pricing:hover .button {background: linear-gradient(to right, #90c73e 0%, #90c73e 100%);}</style>
   <style>.header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link {background-color: #90c73e;}</style>
-  <style>.hero-banner::after, .priceTable-bg::after {opacity: .6;}</style>
+  <style>.hero-banner::after, .priceTable-bg::after {opacity: .7;}</style>
   <style>.priceTable-bg {background: url(/frontend/img/home/home_meeting.jpg) left center no-repeat;}</style>
 </head>
 <body>
@@ -116,7 +116,7 @@
                 </p>
                 </ul>
                 <div class="card-pricing__footer">
-                  <button class="button">Select Plan</button>
+                  <button class="button">Feature List</button>
                 </div>
               </div>
             </div>
@@ -124,9 +124,9 @@
             <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
               <div class="card text-center card-pricing">
                 <div class="card-pricing__header">
-                  <h4>PROVISION CATEGORY</h4>
+                  <h4>GROUP FEATURES</h4>
                   <p>Pay attention to your category</p>
-                    <img src="/frontend/img/home/png/backend.png" width="150px" alt="">
+                    <img src="/frontend/img/home/png/group.png" width="150px" alt="">
                 </div>
                 <ul class="card-pricing__list">
                   <p style="color:black" class="text-center font-weight-normal">
@@ -134,7 +134,7 @@
                 </p>
                 </ul>
                 <div class="card-pricing__footer">
-                    <a href="{{url('/categories')}}"><button class="button">Select Plan</button></a>
+                    <button class="button">Feature List</button>
                 </div>
               </div>
             </div>
@@ -151,7 +151,7 @@
                     Quickly create a meeting schedule with this web with calendar. Turn your online event into an exciting experience that you will have been waiting for.                  </p>
                 </ul>
                 <div class="card-pricing__footer">
-                  <button class="button">Select Plan</button>
+                  <button class="button">Feature List</button>
                 </div>
               </div>
             </div>

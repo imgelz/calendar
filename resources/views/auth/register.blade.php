@@ -1,10 +1,9 @@
 @extends('layouts.Halaman.register')
 
 @section('content')
-
 <div class="register-box">
   <div class="register-logo">
-    <a href="{{url('/calendar')}}"><b>MEET SCHEDULE</b></a>
+    <a href="{{url('/')}}"><b>MEET SCHEDULE</b></a>
     <style>.register-logo a{color: #477008;}</style>
   </div>
   <!-- /.register-logo -->
@@ -13,6 +12,9 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
+            {{-- @if (session('error'))
+                {{ error }}
+            @endif --}}
                 <div class="form-group has-feedback">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" required autocomplete="name" autofocus>
                         @error('name')
@@ -45,9 +47,9 @@
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                 </div>
 
-                <div id="form-input-radio">
+                {{-- <div id="form-input-radio">
                     <label><small>Masukkan kode jika sudah punya grup</small></label>
-                    <input type="text" class="form-control" name="akses_group" placeholder="Masukkan Kode Group">
+                    <input type="text" class="form-control" name="kode" placeholder="Masukkan Kode Group">
                 </div>
                 <br>
 
@@ -57,13 +59,14 @@
                         <input type="checkbox" id="pilihan" name="pilih" value="buat">
                         <span class="slider round"></span>
                     </label>
-                </div>
+                </div> --}}
                 <br>
 
                 <div class="row">
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
                             <label>
+                                <a href="/login">Masuk</a>
                             </label>
                         </div>
                     </div>
@@ -82,17 +85,15 @@
 @section('js')
 <script>
     $(document).ready(function(){
-        // $("#form-input").css("display","none"); //Menghilangkan form-input ketika pertama kali dijalankan
         $("#pilihan").click(function(){ //Memberikan even ketika class detail di klik (class detail ialah class radio button)
             if ($("input[name='pilih']:checked").val() == "buat" ) { //Jika radio button "berbeda" dipilih maka tampilkan form-inputan
             $("#form-input-radio").html(""); //Efek Slide Down (Menampilkan Form Input)
-            $("#form-input-radio").append(`<label><small>Silahkan masukkan nama dan kode grup anda</small></label>
-                    <input type="text" name="nama_group" class="form-control" placeholder="Nama Grup"><br>
-                    <input type="text" class="form-control" name="kode_group" placeholder="Kode Akses Grup">`);
+            $("#form-input-radio").append(`<label><small>Silahkan buat group anda</small></label>
+                    <input type="text" name="nama_grup" class="form-control" placeholder="Nama Grup">`);
             } else {
-            $("#form-input-radio").html(""); //Efek Slide Up (Menghilangkan Form Input)
+            $("#form-input-radio").html("");
             $("#form-input-radio").append(`<label><small>Masukkan kode jika sudah punya grup</small></label>
-                                            <input type="text" name="akses_group" class="form-control" placeholder="Masukkan Kode Grup">`);
+                    <input type="text" name="kode" class="form-control" placeholder="Masukkan Kode Grup">`);
             }
             console.log();
 
@@ -141,7 +142,7 @@
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #90c73e;
 }
 
 input:focus + .slider {

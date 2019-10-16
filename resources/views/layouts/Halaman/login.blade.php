@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="/adminlte/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="/adminlte/plugins/iCheck/square/blue.css">
+  <style>.login-box-body {border-radius: 15px;}</style>
   @yield('css')
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -3,11 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" href="/adminlte/dist/img/iconregist.png"><title>METT SCHEDULE | Registrasi</title>
+  <link rel="icon" href="/adminlte/dist/img/iconlogin.png"><title>MEET SCHEDULE | Buat Group</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -18,7 +16,8 @@
   <link rel="stylesheet" href="/adminlte/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="/adminlte/plugins/iCheck/square/blue.css">
-  <style>.register-box-body {border-radius: 15px;}</style>
+  <style>.login-box-body:hover {border-radius: 15px; transition: all ease-in .2s; transform: scale(1.10);}</style>
+  <style>.login-box-body {border-radius: 15px;}</style>
   @yield('css')
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -30,7 +29,6 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
 </head>
 <body class="hold-transition login-page" style="background:#90c73e">
     @yield('content')

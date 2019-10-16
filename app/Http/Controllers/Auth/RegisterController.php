@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Group;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/verify-group';
 
     /**
      * Create a new controller instance.
@@ -63,6 +64,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        // if ($data['kode']) {
+        //     $data = Group::where('kode', $data['kode']);
+        //     if ($data->count() > 0) {
+        //         $register = new User;
+        //         $register->name = $data->name;
+        //         $register->email = $data->email;
+        //         $register->password = $data->password;
+        //         $register->id_kategori = $data->id_kategori;
+        //         $register->save();
+        //     }
+        //     // if ($data->count() == 0) { }
+        // }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

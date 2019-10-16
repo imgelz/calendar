@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
@@ -14,7 +17,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+        return view('group.index');
     }
 
     /**
@@ -22,7 +25,7 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -35,7 +38,36 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $grup = new Group();
+        $this->validate($request, [
+            'nama_grup' => 'required|unique:groups'
+        ]);
+        $grup->nama_grup = $request->nama_grup;
+        $grup->kode = str_random(8);
+        $grup->save();
+
+        $user_group = DB::table('groups')->where('nama_grup', $request->nama_grup)->first();
+        $update_user = User::findOrFail(Auth::user()->id);
+        $update_user->id_group = $user_group->id;
+        $update_user->save();
+
+        return redirect()->route('group.index');
+    }
+
+    public function gabung(Request $request)
+    {
+        $group_code = DB::table('groups')->where('kode', $request->kode)->get();
+        if ($group_code->count() > 0) {
+            $user_update = User::findOrFail(Auth::user()->id);
+            $user_update->id_group = $group_code[0]->id;
+            $user_update->save();
+
+            return redirect()->route('group.index');
+        }
+
+        if ($group_code->count() == 0) {
+            return redirect()->back()->with('error', 'Kode group tidak ditemukan');
+        }
     }
 
     /**
@@ -46,7 +78,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        //
+        return view('group.verify');
     }
 
     /**

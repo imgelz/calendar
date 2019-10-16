@@ -18,15 +18,18 @@ Route::get('/', function () {
 
 Route::get('/categories', 'FrontendController@kategori');
 
-// Route::get('/calendars', function () {
-//     return view('frontend.calendar');
-// });
+Route::get('/verify-group', function () {
+    return view('group.verify');
+})->middleware('auth');
 
-// Route::get('/contact', function () {
-//     return view('frontend.contact');
-// });
+Route::get('/buat', function () {
+    return view('group.buat');
+})->middleware('auth');
 
 Route::get('/display', 'FrontendController@display')->middleware('auth');
+
+Route::resource('/group', 'GroupController');
+Route::post('/group/gabung', 'GroupController@gabung')->name('gabung');
 
 Route::resource('/calendar', 'EventController');
 Route::resource('/contact', 'ContactController');

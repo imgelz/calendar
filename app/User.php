@@ -27,13 +27,18 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Contact', 'id_user');
     }
+
+    public function grup()
+    {
+        return $this->belongsTo('App\Group', 'id_group');
+    }
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'id_group'
     ];
 
     /**

@@ -4,7 +4,7 @@
 <center>
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{url('/calendar')}}"><b>MEET SCHEDULE</b></a>
+    <a href="{{url('/')}}"><b>MEET SCHEDULE</b></a>
     <style>.login-logo a{color: #477008;}</style>
   </div>
   <!-- /.login-logo -->
@@ -37,7 +37,13 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-                {{-- <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>Remember Me --}}
+                @if (Route::has('password.request'))
+                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                        {{ __('Forgot Your Password?') }}
+                    </a>
+                @endif
+
+                {{-- <a href="/register">Buat Akun disini</a> --}}
             </label>
           </div>
         </div>
@@ -48,23 +54,7 @@
         <!-- /.col -->
       </div>
     </form>
-
-    {{-- <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-        Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-        Google+</a>
-    </div> --}}
-    <!-- /.social-auth-links -->
-
-        {{-- @if (Route::has('password.request'))
-            <a class="btn btn-link" href="{{ route('password.request') }}">
-                {{ __('Forgot Your Password?') }}
-            </a>
-        @endif --}}
-
-    {{-- <a href="register.html" class="text-center">Register a new membership</a> --}}
+    <a href="/register" class="text-center">Daftar disini</a>
 
   </div>
   <!-- /.login-box-body -->
