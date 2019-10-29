@@ -23,11 +23,6 @@ class User extends Authenticatable
         return $this->hasMany('App\LogActivity', 'id_user');
     }
 
-    public function contact()
-    {
-        return $this->hasMany('App\Contact', 'id_user');
-    }
-
     public function grup()
     {
         return $this->belongsTo('App\Group', 'id_group');
@@ -40,6 +35,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'id_group'
     ];
+    public $timestamps = true;
 
     /**
      * The attributes that should be hidden for arrays.

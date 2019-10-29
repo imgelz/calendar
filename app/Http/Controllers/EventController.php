@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Kategori;
-use Session;
+use App\User;
 use Illuminate\Http\Request;
 use DataTables;
 use DateTime;
@@ -22,7 +22,7 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        $events = Event::all();
+        $events = Event::where('id_group', Auth::user()->id_group)->get();
         $event = [];
 
         if ($request->id_kategori) {
@@ -72,6 +72,7 @@ class EventController extends Controller
             'color' => 'required|unique:events',
             'description' => 'required|max:50',
             'id_kategori' => 'required',
+            'tag_user' => 'required',
             'start_date' => 'required',
             'end_date' => 'required'
         ]);
@@ -82,7 +83,9 @@ class EventController extends Controller
         $events->id_kategori = $request->id_kategori;
         $events->start_date = $request->start_date;
         $events->end_date = $request->end_date;
+        $events->tag_user = json_encode($request->tag_user);
         $events->id_user = Auth::user()->id;
+        $events->id_group = Auth::user()->id_group;
         $events->save();
 
         $response = [
@@ -145,6 +148,7 @@ class EventController extends Controller
             'color' => 'required',
             'description' => 'required|max:50',
             'id_kategori' => 'required',
+            'tag_user' => 'required',
             'start_date' => 'required',
             'end_date' => 'required'
         ]);
@@ -154,7 +158,9 @@ class EventController extends Controller
         $events->id_kategori = $request->id_kategori;
         $events->start_date = $request->start_date;
         $events->end_date = $request->end_date;
+        $events->tag_user = json_encode($request->tag_user);
         $events->id_user = Auth::user()->id;
+        $events->id_group = Auth::user()->id_group;
         $events->save();
 
         $response = [
@@ -171,7 +177,7 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request)
     {
         \LogActivity::addToLog("Menghapus Jadwal Kegiatan " . $request->title);
 
@@ -203,6 +209,24 @@ class EventController extends Controller
         $kategori = Kategori::findOrFail($id);
         $response = [
             'data'  => $kategori,
+        ];
+        return response()->json($response, 200);
+    }
+
+    public function tag_user()
+    {
+        $kategori = User::where('id_group', Auth::user()->id_group)->get();
+        $response = [
+            'data' => $kategori,
+        ];
+        return response()->json($response, 200);
+    }
+
+    public function tag($id)
+    {
+        $tag_user = User::findMany($id);
+        $response = [
+            'data'  => $tag_user,
         ];
         return response()->json($response, 200);
     }

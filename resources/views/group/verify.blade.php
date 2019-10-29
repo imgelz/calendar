@@ -1,7 +1,46 @@
 @extends('layouts.Halaman.verify')
 
 @section('content')
-<center>
+
+    <div class="container-login100" style="background-image: url('/signin/images/join.jpg');">
+		<div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+            <form class="login100-form validate-form" action="{{ route('gabung')}}" method="POST">
+                @csrf
+				<span style="color:#90c73e" class="login100-form-title p-b-37">
+					Join Group
+				</span>
+
+				<div class="wrap-input100 validate-input m-b-20" data-validate="Enter code group">
+					<input class="input100" type="text" name="kode" autocomplete="off" placeholder="Masukkan Kode" required>
+					<span class="focus-input100"></span>
+                </div>
+                <div>
+                    @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                </div>
+
+				<div class="container-login100-form-btn">
+					<button class="login100-form-btn">
+						Gabung
+					</button>
+                </div>
+
+                <br><br>
+
+				<div class="text-center">
+					<a href="/buat" class="txt2 hov1">
+						<u>Buat grup</u>
+					</a>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+{{-- <center>
 <div class="login-box">
   <div class="login-logo">
     <a href="{{url('/')}}"><b>MEET SCHEDULE</b></a>
@@ -41,5 +80,5 @@
   </div>
   <!-- /.login-box-body -->
 </div>
-</center>
+</center> --}}
 @endsection

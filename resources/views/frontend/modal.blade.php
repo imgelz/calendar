@@ -31,6 +31,11 @@
                                 <select class="form-control e-kategori" name="id_kategori" id="id_kategori" placeholder="Nama Kategori"></select>
                             </div>
 
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Orang Terkait :</label>
+                                <select class="form-control select2" name="tag_user[]" id="tag_user" multiple></select>
+                            </div>
+
                             <div class="form-group" style="float:left">
                                 <label for="exampleInputPassword1">Waktu Awal :</label>
                                 <input id="start_date" type="datetime" class="form-control" name="start_date">

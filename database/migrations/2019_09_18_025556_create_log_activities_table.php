@@ -21,6 +21,7 @@ class CreateLogActivitiesTable extends Migration
             $table->string('ip');
             $table->string('agent')->nullable();
             $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_group');
             $table->timestamps();
         });
     }

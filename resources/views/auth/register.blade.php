@@ -1,7 +1,55 @@
-@extends('layouts.Halaman.register')
+@extends('layouts.Halamanfrontend.signup')
 
 @section('content')
-<div class="register-box">
+
+ <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" action="{{ route('register') }}" id="signup-form" class="signup-form">
+                        @csrf
+                        <h2 class="form-title">Create account</h2>
+                        <div class="form-group">
+                            <input id="name" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" required autocomplete="name" autofocus type="text" class="form-input @error('name') is-invalid @enderror"/>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input @error('email') is-invalid @enderror" name="email" id="email" placeholder="Your Email"  value="{{ old('email') }}" required />
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input id="password" type="password" name="password" required autocomplete="new-password" class="form-input @error('password') is-invalid @enderror"  placeholder="Password"/>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            {{-- <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span> --}}
+                        </div>
+                        <div class="form-group">
+                            <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password"class="form-input" placeholder="Repeat your password"/>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="form-submit" value="Sign up"/>
+                        </div>
+                    </form>
+                    <p class="loginhere">
+                        Have already an account ? <a href="/login" class="loginhere-link">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+{{-- <div class="register-box">
   <div class="register-logo">
     <a href="{{url('/')}}"><b>MEET SCHEDULE</b></a>
     <style>.register-logo a{color: #477008;}</style>
@@ -12,9 +60,6 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
-            {{-- @if (session('error'))
-                {{ error }}
-            @endif --}}
                 <div class="form-group has-feedback">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" required autocomplete="name" autofocus>
                         @error('name')
@@ -47,19 +92,7 @@
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                 </div>
 
-                {{-- <div id="form-input-radio">
-                    <label><small>Masukkan kode jika sudah punya grup</small></label>
-                    <input type="text" class="form-control" name="kode" placeholder="Masukkan Kode Group">
-                </div>
-                <br>
 
-                <div>
-                    <label>Buat Group ? </label><br>
-                    <label class="switch">
-                        <input type="checkbox" id="pilihan" name="pilih" value="buat">
-                        <span class="slider round"></span>
-                    </label>
-                </div> --}}
                 <br>
 
                 <div class="row">
@@ -79,10 +112,10 @@
         </form>
     </div>
   <!-- /.register-box-body -->
-</div>
+</div> --}}
 @endsection
 
-@section('js')
+{{-- @section('js')
 <script>
     $(document).ready(function(){
         $("#pilihan").click(function(){ //Memberikan even ketika class detail di klik (class detail ialah class radio button)
@@ -100,8 +133,8 @@
         });
     });
 </script>
-@endsection
-<style>
+@endsection --}}
+{{-- <style>
 .switch {
   position: relative;
   display: inline-block;
@@ -163,4 +196,4 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-</style>
+</style> --}}

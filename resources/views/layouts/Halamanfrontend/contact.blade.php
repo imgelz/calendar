@@ -20,6 +20,7 @@
   <style>.button:hover {background-color: #90c73e; border-color: #000000; color: #fff;}</style>
   <style>.card-feature:hover {background: #ededed; box-shadow: 0px 0px 0px 0px rgba(144, 148, 139); transition: all ease-in .2s; transform: scale(1.05);}</style>
   <style>.body {color:black;}</style>
+    {{-- <style>.header_area .navbar {background: #3f3e3e;}</style> --}}
   <style>.footer-area .footer-bottom .footer-social a {color: #90c73e;}</style>
   <style>.footer-area .footer-bottom .footer-social a:hover {color: #d1fc97;}</style>
   <style>.footer-area .single-footer-widget h4 {color: #90c73e;}</style>

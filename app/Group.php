@@ -13,4 +13,14 @@ class Group extends Model
     {
         return $this->hasMany('App\User', 'id_group');
     }
+
+    public function event()
+    {
+        return $this->hasMany('App\Event', 'id_group');
+    }
+
+    public function log()
+    {
+        return $this->hasMany('App\LogActivity', 'id_group');
+    }
 }

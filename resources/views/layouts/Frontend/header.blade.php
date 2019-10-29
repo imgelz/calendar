@@ -12,12 +12,13 @@
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul class="nav navbar-nav menu_nav justify-content-end">
                     {{-- <li class="nav-item {{ Request::segment(1) == ''? 'active':''}} "><a class="nav-link" href="{{url('/')}}">Home</a></li> --}}
-                    <li class="nav-item {{ Request::segment(1) == 'categories'? 'active':''}} "><a class="nav-link" href="{{url('/categories')}}">Category</a></li>
-                    <li class="nav-item {{ Request::segment(1) == 'calendar'? 'active':''}}"><a class="nav-link" href="{{url('calendar')}}">Calendar</a>
-                    @if(Auth::check())
-                    <li class="nav-item {{ Request::segment(1) == 'display'? 'active':''}}"><a class="nav-link" href="{{url('/display')}}">Schedule</a>
-                    <li class="nav-item {{ Request::segment(1) == 'activity'? 'active':''}}"><a class="nav-link" href="{{url('/activity')}}">Activity</a>
+                    <li class="nav-item {{ Request::segment(1) == 'categories'? 'active':''}} "><a class="nav-link" href="{{url('/categories')}}">Service</a></li>
                     <li class="nav-item {{ Request::segment(1) == 'contact'? 'active':''}}"><a class="nav-link" href="{{url('/contact')}}">Contact</a>
+                    {{-- <li class="nav-item {{ Request::segment(1) == 'calendar'? 'active':''}}"><a class="nav-link" href="{{url('calendar')}}">Calendar</a> --}}
+                    @if(Auth::check())
+                    {{-- <li class="nav-item {{ Request::segment(1) == 'display'? 'active':''}}"><a class="nav-link" href="{{url('/display')}}">Schedule</a>
+                    <li class="nav-item {{ Request::segment(1) == 'activity'? 'active':''}}"><a class="nav-link" href="{{url('/activity')}}">Activity</a> --}}
+                    {{-- <li class="nav-item {{ Request::segment(1) == 'contact'? 'active':''}}"><a class="nav-link" href="{{url('/contact')}}">Contact</a> --}}
                     <li class="nav-item submenu dropdown">
                         <a style="color:#ededed" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                         aria-expanded="false"><img src="/frontend/img/home/png/user.png" width="20px"> {{ Auth::user()->name }}</a>
@@ -31,7 +32,6 @@
                         </ul>
                     </li>
                     @else
-                    <li class="nav-item {{ Request::segment(1) == 'contact'? 'active':''}}"><a class="nav-link" href="{{url('/contact')}}">Contact</a>
                     <li class="nav-item">
                         <br>
                         <a class="button button-outline button-small" href="/login">Sign In</a>

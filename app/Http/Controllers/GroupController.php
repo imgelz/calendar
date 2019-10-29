@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\User;
 use Auth;
+use DataTables;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,9 +17,20 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('group.index');
+        if ($request->ajax()) {
+            $user = User::where('id_group', Auth::user()->id_group)->get();
+            return Datatables::of($user)
+                ->addIndexColumn()
+                ->addColumn('created_at', function ($row) {
+                    $created_at = Carbon::parse($row->created_at)->format('l, d M Y || H:i:s');
+                    return $created_at;
+                })
+                ->rawColumns(['created_at'])
+                ->make(true);
+        }
+        return view('frontend.group');
     }
 
     /**
@@ -38,7 +51,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $grup = new Group();
+        $grup = new Group;
         $this->validate($request, [
             'nama_grup' => 'required|unique:groups'
         ]);
@@ -51,7 +64,7 @@ class GroupController extends Controller
         $update_user->id_group = $user_group->id;
         $update_user->save();
 
-        return redirect()->route('group.index');
+        return view('frontend.group');
     }
 
     public function gabung(Request $request)
@@ -62,11 +75,11 @@ class GroupController extends Controller
             $user_update->id_group = $group_code[0]->id;
             $user_update->save();
 
-            return redirect()->route('group.index');
+            return view('frontend.group');
         }
 
         if ($group_code->count() == 0) {
-            return redirect()->back()->with('error', 'Kode group tidak ditemukan');
+            return redirect()->back()->with('error', 'Group tidak ditemukan !');
         }
     }
 
@@ -76,9 +89,20 @@ class GroupController extends Controller
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show(Request $request)
     {
-        return view('group.verify');
+        if ($request->ajax()) {
+            $group = Group::latest()->get();
+            return Datatables::of($group)
+                ->addIndexColumn()
+                ->addColumn('aksi', function ($row) {
+                    $btn = '<button type="button" class="hapus-group btn btn-danger btn-sm" data-id="' . $row->id . '" data-nama_gruo="' . $row->nama_grup . '" data-kode="' . $row->kode . '" data-toggle="modal" data-target="#hapus-group"><i class="fa fa-trash-o"></i></button>';
+                    return $btn;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+        }
+        return view('group.index');
     }
 
     /**

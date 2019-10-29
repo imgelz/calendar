@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content" style="border-radius:9px">
             <div class="modal-header" style="background:#abdb5a">
                 <center><h3 style="color:#477008" class="modal-title">Tambah Jadwal Kegiatan</h3></center>
@@ -35,6 +35,18 @@
                                     <option value="">Pilih Kategori</option>
                                     @foreach ($kategori as $data)
                                         <option value="{{ $data->id }}">{{ $data->nama_kategori }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Orang Terkait :</label>
+                                <select class="form-control select2" id="tag_user" name="tag_user[]" multiple="multiple">
+                                    @php
+                                        $user = \App\User::where('id_group', Auth::user()->id_group)->get();
+                                    @endphp
+                                    @foreach ($user as $data)
+                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

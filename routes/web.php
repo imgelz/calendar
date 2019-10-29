@@ -12,11 +12,16 @@
 */
 //Universal Route = Frontend
 
+// if (){
+
+// }
+
 Route::get('/', function () {
-    return view('layouts.Halamanfrontend.frontend');
+    return view('frontend.index');
 });
 
 Route::get('/categories', 'FrontendController@kategori');
+Route::resource('/contact', 'ContactController');
 
 Route::get('/verify-group', function () {
     return view('group.verify');
@@ -25,25 +30,42 @@ Route::get('/verify-group', function () {
 Route::get('/buat', function () {
     return view('group.buat');
 })->middleware('auth');
+Route::resource('/grup', 'GroupController');
 
-Route::get('/display', 'FrontendController@display')->middleware('auth');
 
-Route::resource('/group', 'GroupController');
-Route::post('/group/gabung', 'GroupController@gabung')->name('gabung');
+// Route::get('/display', 'FrontendController@display')->middleware('auth');
+// Route::put('/display/{id}', 'EventController@update');
+// Route::delete('/display/{id}', 'EventController@destroy');
+// Route::get('/category', 'EventController@kat');
+// Route::get('/categori/{id}', 'EventController@kateg');
 
-Route::resource('/calendar', 'EventController');
-Route::resource('/contact', 'ContactController');
+// Route::resource('/group', 'GroupController');
 
-Route::get('/activity', 'FrontendController@activity')->middleware('auth');
 
-Route::put('/display/{id}', 'EventController@update');
-Route::delete('/display/{id}', 'EventController@destroy');
-Route::get('/category', 'EventController@kat');
-Route::get('/categori/{id}', 'EventController@kateg');
+// Route::get('/activity', 'FrontendController@activity')->middleware('auth');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'api/v1/'], function () {
+    Route::resource('users', 'Api\UserController');
+});
+
+Route::group(['prefix' => 'group', 'middleware' => ['auth']], function () {
+    Route::resource('/', 'GroupController');
+    Route::resource('/calendar', 'EventController');
+
+    Route::post('/gabung', 'GroupController@gabung')->name('gabung');
+    Route::get('/activity', 'FrontendController@activity');
+
+    Route::get('/display', 'FrontendController@display');
+    Route::put('/display/{id}', 'EventController@update');
+    Route::delete('/display/{id}', 'EventController@destroy');
+    Route::get('/category', 'EventController@kat');
+    Route::get('/categori/{id}', 'EventController@kateg');
+    Route::get('/taguser', 'EventController@tag_user');
+    Route::get('/tag/{id}', 'EventController@tag');
+});
 
 //AdminRoute = Backend
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
@@ -53,6 +75,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::resource('/logActivity', 'LogActivityController');
     Route::delete('/logActivity/{id}', 'LogActivityController@destroy');
     Route::get('/contact', 'ContactController@show');
+    Route::get('/group', 'GroupController@show');
+    Route::delete('/group/{id}', 'ContactController@destroy');
     Route::delete('/contact/{id}', 'ContactController@destroy');
     Route::resource('/kategori', 'KategoriController');
     Route::put('/kategori/{id}', 'KategoriController@update');

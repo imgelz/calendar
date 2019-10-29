@@ -37,6 +37,7 @@
 @section('js')
     <script src="/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -82,11 +83,13 @@
                         method: 'DELETE',
                         data: $('#form-hapus-log').serialize(),
                         success: function (res) {
-                            swal({
-                                title: "Berhasil Menghapus",
-                                icon: "success",
-                            });
-
+                            Swal.fire({
+                                title: 'Berhasil !',
+                                text: 'Delete Schedule Successfully',
+                                type: 'success',
+                                showConfirmButton: false,
+                                timer: 15000
+                            })
                             location.reload();
                         },
                         error: function (err) {

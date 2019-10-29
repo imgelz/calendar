@@ -12,10 +12,10 @@
                         <table id="dataTable" class="table table-striped">
                         <thead>
                             <th>No</th>
-                            <th>Subject</th>
-                            <th>Message</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Subject</th>
+                            <th>Message</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody class="data-contact">
@@ -35,6 +35,7 @@
 @section('js')
     <script src="/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -49,10 +50,10 @@
                 ajax: "{{ url('/admin/contact') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                    {data: 'nama', name: 'nama'},
+                    {data: 'email', name: 'email'},
                     {data: 'subject', name: 'subject'},
                     {data: 'message', name: 'message'},
-                    {data: 'user.name', name: 'user.name'},
-                    {data: 'user.email', name: 'user.email'},
                     {data: 'aksi', name: 'aksi', orderable: false, searchable: false},
                 ]
             });
@@ -78,11 +79,13 @@
                         method: 'DELETE',
                         data: $('#form-hapus-log').serialize(),
                         success: function (res) {
-                            swal({
-                                title: "Berhasil Menghapus",
-                                icon: "success",
-                            });
-
+                            Swal.fire({
+                                title: 'Berhasil !',
+                                text: 'Delete Message Successfully',
+                                type: 'success',
+                                showConfirmButton: false,
+                                timer: 15000
+                            })
                             location.reload();
                         },
                         error: function (err) {

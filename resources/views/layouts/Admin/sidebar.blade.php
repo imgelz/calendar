@@ -127,6 +127,12 @@
           </a>
         </li>
 
+        <li {{ Request::segment(1) == 'admin/group'? 'active':''}}>
+          <a href="{{url('admin/group')}}">
+            <i class="fa fa-group"></i> <span>Group</span>
+          </a>
+        </li>
+
         <li {{ Request::segment(1) == 'admin/contact'? 'active':''}}>
           <a href="{{url('admin/contact')}}">
             <i class="fa fa-envelope"></i> <span>Message</span>

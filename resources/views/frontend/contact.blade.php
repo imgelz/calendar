@@ -11,24 +11,34 @@
                     <form id="form-create-contact">
                         <input type="hidden" name="id" id="id">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control" autocomplete="off" name="subject" id="subject" type="text" placeholder="Enter Subject">
+                                    <input class="form-control" name="nama" id="nama" type="text" placeholder="Enter your name" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="email" id="email" type="email" placeholder="Enter email address" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" placeholder="Enter Message"></textarea>
+                                    <input class="form-control" autocomplete="off" name="subject" id="subject" type="text" placeholder="Enter Subject" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" placeholder="Enter Message" required></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mt-lg-3">
-                            @if(Auth::check())
                             <button type="submit" style="background:#90c73e; color:white" class="button button-contactForm">Send Message</button>
-                            @else
-                            @endif
                         </div>
                     </form>
+                    <div>
+                        <p style="color:#999999"><img src="/frontend/img/home/png/reply-email.png" width="20px">  !! Pesan balasan akan dikirim melalui email yang di masukkan</p>
+                    </div>
                 </div>
 
                 <div class="col-lg-4">

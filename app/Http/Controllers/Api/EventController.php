@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Event;
+use App\Kategori;
 
 class EventController extends Controller
 {
@@ -15,7 +16,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::latest()->get();
+        $events = Event::with('kategori', 'group')->latest()->get();
         if (count($events) <= 0) {
             $response = [
                 'success' => false,

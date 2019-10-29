@@ -21,7 +21,9 @@ class CreateEventsTable extends Migration
             $table->unsignedBigInteger('id_kategori');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->string('tag_user');
             $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_group');
             $table->timestamps();
         });
     }

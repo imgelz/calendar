@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Event;
 use App\Kategori;
 use App\LogActivity;
+use Auth;
 
 class FrontendController extends Controller
 {
     public function display(Request $request)
     {
-        $events = Event::with('kategori')->where('title', 'like', "%$request->title%")->paginate(9);
+        $events = Event::where('id_group', Auth::user()->id_group)->get();
         return view('frontend.display', compact('events'));
     }
 
@@ -23,7 +24,7 @@ class FrontendController extends Controller
 
     public function activity(Request $request)
     {
-        $logActivity = LogActivity::with('user')->where('subject', 'like', "%$request->subject%")->get();
+        $logActivity = LogActivity::where('id_group', Auth::user()->id_group)->get();
         return view('frontend.activity', compact('logActivity'));
     }
 }

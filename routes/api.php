@@ -13,12 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::resource('event', 'Api\EventController');
 
 Route::resource('logActivity', 'Api\LogActivityController');
 
 Route::resource('kategori', 'Api\KategoriController');
+
+Route::resource('group', 'Api\GroupController');

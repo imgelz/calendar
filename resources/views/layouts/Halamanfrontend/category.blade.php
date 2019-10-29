@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>MEET SCHEDULE | Category</title>
+  <title>MEET SCHEDULE | Service</title>
     <link rel="icon" href="/frontend/img/logomeets.png" type="image/png">
 
   <link rel="stylesheet" href="/frontend/vendors/bootstrap/bootstrap.min.css">
@@ -20,6 +20,7 @@
   <style>.button:hover {background-color: #90c73e; border-color: #000000; color: #fff;}</style>
   <style>.card-feature:hover {background: #ededed; box-shadow: 0px 0px 0px 0px rgba(144, 148, 139); transition: all ease-in .2s; transform: scale(1.05);}</style>
   <style>.body {color:black;}</style>
+  {{-- <style>.header_area .navbar {background: #3f3e3e;}</style> --}}
   <style>.footer-area .footer-bottom .footer-social a {color: #90c73e;}</style>
   <style>.footer-area .footer-bottom .footer-social a:hover {color: #d1fc97;}</style>
   <style>.footer-area .single-footer-widget h4 {color: #90c73e;}</style>
@@ -41,11 +42,11 @@
   <!--================ Banner SM Section start =================-->
   <section class="hero-banner hero-banner-sm text-center">
     <div class="container">
-      <h1>Categories</h1>
+      <h1>Service Categories</h1>
       <nav aria-label="breadcrumb" class="banner-breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Category</li>
+          <li class="breadcrumb-item active" aria-current="page">Service</li>
         </ol>
       </nav>
     </div>
@@ -55,9 +56,9 @@
   <!--================ Feature section start =================-->
     <br><br>
   <section class="text-center">
-        <h2 style="color:#90c73e">Category</h2>
+      <br><br>
+        <h2 style="color:#90c73e">Service</h2>
         <div class="section-style"></div>
-
         @yield('content')
   </section>
   <!--================ Feature section end =================-->

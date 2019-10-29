@@ -54,7 +54,7 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        \LogActivity::addToLog("Menambah Kategori " . $request->nama_kategori);
+        // \LogActivity::addToLog("Menambah Kategori " . $request->nama_kategori);
 
         $this->validate($request, [
             'nama_kategori' => 'required|unique:kategoris',
@@ -114,7 +114,7 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        \LogActivity::addToLog("Mengubah Kategori " . $request->nama_kategori);
+        // \LogActivity::addToLog("Mengubah Kategori " . $request->nama_kategori);
 
         $kategori = Kategori::findOrFail($request->id);
         $this->validate($request, [
@@ -161,7 +161,7 @@ class KategoriController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        \LogActivity::addToLog("Menghapus Kategori " . $request->nama_kategori);
+        // \LogActivity::addToLog("Menghapus Kategori " . $request->nama_kategori);
 
         $kategori = Kategori::findOrFail($request->id);
         if (!Kategori::destroy($request->id)) {

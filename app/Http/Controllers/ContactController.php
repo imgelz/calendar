@@ -37,17 +37,18 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-
-        // \LogActivity::addToLog("Mengirim Saran " . $request->subject);
         $contact = new Contact;
 
         $this->validate($request, [
-            'subject' => 'required|max:25',
-            'message' => 'required|max:500'
+            'nama' => 'required',
+            'email' => 'required',
+            'subject' => 'required',
+            'message' => 'required|max:1000'
         ]);
+        $contact->nama = $request->nama;
+        $contact->email = $request->email;
         $contact->subject = $request->subject;
         $contact->message = $request->message;
-        $contact->id_user = Auth::user()->id;
         $contact->save();
 
         $response = [
@@ -67,11 +68,11 @@ class ContactController extends Controller
     public function show(Request $request)
     {
         if ($request->ajax()) {
-            $contact = Contact::with('user')->latest()->get();
+            $contact = Contact::latest()->get();
             return Datatables::of($contact)
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($row) {
-                    $btn = '<button type="button" class="hapus-contact btn btn-danger btn-sm" data-id="' . $row->id . '" data-subject="' . $row->subject . '" data-message="' . $row->message . '"  data-id_user="' . $row->id_user . '" data-toggle="modal" data-target="#hapus-contact"><i class="fa fa-trash-o"></i></button>';
+                    $btn = '<button type="button" class="hapus-contact btn btn-danger btn-sm" data-id="' . $row->id . '" data-subject="' . $row->subject . '" data-message="' . $row->message . '"  data-nama ="' . $row->nama . '" data-email ="' . $row->email . '" data-toggle="modal" data-target="#hapus-contact"><i class="fa fa-trash-o"></i></button>';
                     return $btn;
                 })
                 ->rawColumns(['aksi'])
@@ -100,24 +101,7 @@ class ContactController extends Controller
      */
     public function update(Request $request)
     {
-        // \LogActivity::addToLog("Mengubah Saran " . $request->subject);
-
-        // $this->validate($request, [
-        //     'subject' => 'required|max:25',
-        //     'message' => 'required|max:500'
-        // ]);
-        // $contact = Event::findOrFail($request->id);
-        // $contact->subject = $request->subject;
-        // $contact->message = $request->message;
-        // $contact->id_user = Auth::user()->id;
-        // $contact->save();
-
-        // $response = [
-        //     'success' => true,
-        //     'data'  => $contact,
-        //     'message' => 'Berhasil Menambah!'
-        // ];
-        // return response()->json($response, 200);
+        //
     }
 
     /**
